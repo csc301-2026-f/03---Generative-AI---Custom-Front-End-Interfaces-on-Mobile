@@ -103,54 +103,74 @@ Describe meetings (and other events) you are planning to have.
   
 #### Q9: How will you organize your team?
 
-List/describe the artifacts you will produce to organize your team. (We strongly recommend that you use standard collaboration tools like Linear.app, Jira, Slack, Discord, GitHub.)       
-
- * Artifacts can be To-Do lists, Task boards, schedule(s), meeting minutes, etc.
- * We want to understand:
-   * How do you keep track of what needs to get done? (You must grant your TA and partner access to systems you use to manage work)
-   * **How do you prioritize tasks?**
-   * How do tasks get assigned to team members?
-   * How do you determine the status of work from inception to completion?
+Our team will use Jira, GitHub, Slack, and meeting minutes to organize and track our work. Jira will be our main task-management tool. Our project will be represented by an Epic, and larger features or tasks will be broken down into child tickets. GitHub will be used to manage code changes and pull requests, while Slack will be used for day-to-day communication and resolving blockers.
+Tasks will be prioritized based on their importance to the MVP, project deadlines, dependencies between features, and feedback from our partner. Core features and blocking tasks will be completed before lower-priority enhancements.
+Tasks will be assigned according to each team member’s responsibilities and the part of the system they are working on. When necessary, larger tasks will be divided into smaller tickets so that work can be distributed clearly among team members.
+We will use Jira ticket status and GitHub pull requests to track progress from the time a task is created until it is completed. Meeting minutes will also be used to record important decisions, action items, and changes in project direction. Our TA and project partner will be given access to the relevant project-management artifacts.
 
 #### Q10: What are the rules regarding how your team works?
 
-**Communications:**
- * What is the expected frequency? What methods/channels will be used? 
- * If you have a partner project, what is your process for communicating with your partner? Who is responsible?
- 
-**Collaboration:**
- * How are people held accountable for attending meetings, completing action items? What is your process?
- * How will you address the issue if one person doesn't contribute or is not responsive?
+Communications:
+Our team will use Slack for day-to-day communication, project updates, questions, and blockers. Team members are expected to check team messages regularly and respond to important messages within 36 hours. Important decisions, action items, and partner feedback will be documented so that all team members have a shared understanding of the project.
+Communication with Savi Finance will primarily take place through Slack and scheduled partner meetings. Yifei Yang and Kevin will serve as the partner liaisons for the team. They will be responsible for coordinating communication with Savi Finance, arranging partner meetings, collecting questions from the team, and sharing partner feedback and decisions with the rest of the group.
+Collaboration:
+Team members are expected to attend scheduled meetings, complete assigned action items by the agreed deadlines, and communicate early if they are blocked or unable to complete a task. Progress will be tracked through our project-management tools and reviewed during team meetings.
+If a team member is repeatedly unresponsive or does not complete their assigned work, the team will first contact them directly to understand the issue and agree on a recovery plan. If the problem continues, the issue will be discussed as a team and, if necessary, escalated to the TA or course staff.
 
 ## Organisation Details
 
 #### Q11. How does your team fit within the overall team organisation of the partner?
-* Given the team structure of your partner, what role do you think your team will play?
-* Examples include product development that includes developing new features, or quality assurance that includes developing features that test the product reliability, or software maintenance that includes fixing crucial bugs in the product.
-* Provide examples of why you think you fit this role.
+Our team will primarily function as a product development team within Savi Finance. We are responsible for developing and integrating the AI-generated custom widget feature into Savi Finance’s existing mobile platform.
+Rather than building a separate application, our team will work within Savi Finance’s existing engineering and product structure. We will use the existing mobile application, backend services, design system, and widget infrastructure while taking ownership of the new AI-widget user experience and its integration into the product.
+Our work will involve both frontend and backend integration, including connecting the existing widget-generation functionality to the mobile application, rendering generated widgets safely, supporting widget lifecycle features, and helping define how users interact with generated financial visualizations.
+We will also work closely with Savi Finance’s engineering and product team for requirement clarification, architecture decisions, feedback, and code review. This allows our team to contribute a new product feature while remaining aligned with the partner’s existing system and development process.
 
 #### Q12. How does your project fit within the overall product from the partner?
-* Look at the big picture of the product and think about how your project fits into this product.
-* Is your project the first step towards building this product? Is it the first prototype? Are you developing the frontend of a product whose backend is developed by the partner? Are you building the release pipelines for a product that is developed by the partner? Are you building a core feature set and take full ownership of these features?
-* You should also provide details of who else is contributing to what parts of the product, if you have this information. This is more important if the project that you will be working on has strong coupling with parts that will be contributed to by members other than your team (e.g., from a partner).
-* You can be creative for these questions and even use a graphical or pictorial representation to demonstrate the fit.
-* Briefly specify what your partner considers a success for this project. Do they want you to build specific features? Publish a usable product? Just a prototype? Be as specific as you can be at this point.
+Our project extends the existing Savi Finance mobile platform by adding AI-generated, customizable financial dashboard widgets. It is not a standalone application or a completely new product. Instead, it builds on Savi Finance’s existing mobile application, backend services, financial data infrastructure, and widget-generation functionality.
+Savi Finance already has a React Native mobile application and a Go backend with APIs for creating, retrieving, updating, undoing, and deleting generated widgets. The backend can already generate and store structured widget definitions, but the full mobile experience for consuming and interacting with these AI-generated widgets is not yet complete. Our team’s role is therefore to connect these existing capabilities into a usable end-to-end mobile feature.    TEAM_TECHNICAL_ARCHITECTURE
+Our work will focus on the product experience around AI-generated widgets, including allowing users to generate widgets from natural-language prompts, render them safely in the mobile application, save and reopen them, pin and organize them on the dashboard, modify them, and share them. The Savi Finance team will continue to provide the existing platform, backend infrastructure, design system, and technical guidance that our work integrates with.    TEAM_MVP
+At this stage, Savi Finance considers the project successful if we can turn the existing prototype and backend functionality into a usable end-to-end feature within the real Savi mobile application. The longer-term goal is for the feature to be production-ready and eventually launched as part of the Savi Finance platform, rather than remaining only as a standalone prototype.
 
 ## Potential Risks
 
 #### Q13. What are some potential risks to your project?
-* Now that you have defined your project, what risks can you identify that might impact it?
-* Some examples of risks at this planning stage could include:
-  * Uncertainties regarding a specific feature
-  * Misaligned expectations or conflicts
-  * Lack of clarity in execution or decision-making
-  * Limited access to data, systems, or other dependencies
-  * User stories that are too abstract or too simple
-* For each risk, provide a brief bullet point and then explain the risk in detail. 
+Inconsistent AI-generated widget output
+The project relies on AI to generate structured widget definitions from user prompts. The generated result may sometimes be invalid, unsupported by the mobile application, or different from what the user intended. This may affect the reliability and usability of the feature.
+
+Integration with the existing Savi Finance system
+Our feature must integrate with Savi Finance’s existing mobile application, backend services, widget APIs, and reusable UI components. Since these systems were developed before our project, there may be technical dependencies or constraints that the team does not initially understand, which could slow development.
+
+Unclear reusable component and rendering contract
+The team still needs to clearly define which Savi UI components can be used in AI-generated widgets and what structure the generator is allowed to produce. If the generator and renderer do not follow the same component contract, generated widgets may fail to render correctly.
+
+Complexity of partial widget editing
+One planned feature is to allow users to select and modify only part of a generated widget. This may require changes to the current widget structure or API design, and the implementation may be more complex than expected.
+
+Dependencies on partner access and infrastructure
+The team depends on access to Savi Finance resources such as GitHub repositories, Jira, Figma, backend services, and testing environments. Delays in access, setup, or partner feedback could block development.
+
+Project scope may be too large for the course timeline
+The project includes several major features, including AI generation, rendering, saving, reopening, pinning, reordering, editing, undo, and sharing. If the scope is not prioritized carefully, the team may not have enough time to complete and test a stable MVP. 
 
 #### Q14. What are some potential mitigation strategies for the risks you identified?
-* Examples of mitigation strategies:
-  * More communication with the partner might help with improving clarity.
-  * Adding more details for an user story might make it less abstract.
-  * Adding an extra user story might increase the project complexity, making it less simple.
-* It's ok if you are unable to find mitigation strategies for all the risks right now.
+Validate AI-generated widget definitions before rendering
+To reduce problems caused by inconsistent AI output, the team will define a clear structure for generated widgets and validate generated results before they are rendered in the mobile application. Unsupported or invalid output should be handled safely rather than displayed directly.
+
+Integrate with the existing system incrementally
+Instead of attempting to connect all features at once, the team will build and test the integration in smaller steps. For example, the team can first verify that a generated widget can successfully move from the backend to the mobile application before adding editing, sharing, and other advanced functionality.
+
+Define an approved reusable component set
+The team will review the existing Savi Finance UI components and agree on which components can be used by AI-generated widgets. The generator and renderer will follow the same component structure to reduce compatibility issues.
+
+Reduce the initial scope of partial widget editing if necessary
+The team will first investigate the existing widget update flow and determine what level of partial editing is realistic within the course timeline. If full selected-part editing requires major backend changes, the feature can be simplified or implemented in stages after discussing the trade-offs with the partner.
+
+Resolve access and environment issues early
+Team members will confirm access to required repositories, Jira, Figma, backend services, and development environments early in the project. Any missing access or setup blockers will be reported to the partner as soon as possible.
+
+Prioritize the core MVP before optional features
+The team will prioritize the features required for a complete end-to-end user flow before working on optional or enhancement features. Lower-priority functionality can be deferred if it threatens the stability or completion of the MVP.
+
+## AI Tools Used
+
+We used ChatGPT to help brainstorm, organize, and refine wording for parts of the D1 planning document. All generated content was reviewed, edited, and verified by the team before submission.
