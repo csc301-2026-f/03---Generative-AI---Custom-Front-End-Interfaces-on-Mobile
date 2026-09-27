@@ -94,6 +94,13 @@ List each team member and:
 
 We plan to have meeting twice a week, online or in-person depending on the needs. If the meeting is online, we will have it through discord and phone calls. If the meeting is in-person, we probably will pick one library we like to meet up. The purpose of the meeting is mainly to dicuss each other's university life, the progress of current project and the plan for the future week. The main goal is to combine everyone's idea to a more mature big goal. There are also online coding sessions, where everyone discussing their latest ideas and update the progress. We have three meetings before D1 is due. The first one was a brief group discussion on welcoming everyone to the team and chat about our goal on this project. The second one was about D1. we spread D1 into sections and assign each team member a part of it. We work together to finish D1. The third one will be more about the project, we extend the discussion from D1 to more deep into the project. We discuss details about the work for each team members and the existing codebase given by our partner.
 
+![photo1](./images/photo1.png)
+
+![photo2](./images/photo2.png)
+
+![photo3](./images/photo3.png)
+
+
   
 #### Q9: How will you organize your team?
 
