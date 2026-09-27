@@ -1,4 +1,4 @@
-# YOUR PRODUCT/TEAM NAME
+# Savi Finance Mobile App - 404 Team Name Not Found
 > _Note:_ This document will evolve throughout your project. You commit regularly to this file while working on the project (especially edits/additions/deletions to the _Highlights_ section). 
  > **This document will serve as a master plan between your team, your partner and your TA.**
 
@@ -6,35 +6,32 @@
  
 #### Q1: What is the product?
 
- > Short (1 - 2 min' read)
- * Start with a single sentence, high-level description of the product.
- * Be clear - Describe the problem you are solving in simple terms.
- * Specify if you have a partner, who they are (role/title), and the organization information.
- * Be concrete. For example:
-    * What are you planning to build? Is it a website, mobile app, browser extension, command-line app, etc.?      
-    * When describing the problem/need, give concrete examples of common use cases.
-    * Assume the reader knows nothing about the partner or the problem domain and provide the necessary context. 
- * Focus on *what* your product does, and avoid discussing *how* you're going to implement it.      
-   For example: This is not the time or the place to talk about which programming language and/or framework you are planning to use.
- * **Feel free (and very much encouraged) to include useful diagrams, mock-ups and/or links**.
+ Savi Finance is a personal finance mobile app that helps individuals and households in financial aspects, including understanding their money, managing everyday spending, planning for future goals in one place.
+ We are building a generation agent in a mobile app which brings these activities together. Users can organize their accounts and transactions, review spending by category, track savings goals, and view projections of their future finances. Shared household features help people coordinate their finances, while an integrated assistant, Ask Savi, gives users a conversational way to ask financial questions.
+ Some examples:
+ •	Understand everyday spending: A user can review recent transactions and see how much they spend on groceries, transportation, and dining.
+ •	Plan for a purchase: Someone saving for a vacation can track their progress and explore how the expense could affect their projected finances.
+ Ralph Maamari, the Co-Founder of Savi Finance is our partner. Savi Finance’s goal is helping Consumers & Businesses automate & grow their finances all in one place with real-time collaboration, thousands of bank integrations (with AI Receipt Capture) and innovative regional insights (Compare Rent Costs).
+ 
 
 
 #### Q2: Who are your target users?
 
-  > Short (1 - 2 min' read max)
- * Be specific (e.g. a 'a third-year university student taking CSC301 and studying Computer Science' and not 'a student')
- * **Feel free to use personas. You can create your personas as part of this Markdown file, or add a link to an external site (for example, [Xtensio](https://xtensio.com/user-persona/)).**
+Savi Finance targets young adults managing their own finances and couples coordinating household money. 
+
+To be specific, consider Jessie, 25, a recent graduate in her first full-time job. Jessie receives a regular salary, pays rent, uses two credit cards, and is repaying a student loan. She checks her banking apps frequently but struggles to tell how much she can spend while still saving. She wants to build an emergency fund and budget for a vacation without maintaining a detailed spreadsheet. Savi helps review spending across accounts, organize transactions, and track savings goals, which further let her understand how today’s spending could affect her future balance. 
+
+The target can also be young couples Alex and Judy, 29 and 31,managing shared household expenses. They recently moved in together. They decided to separate personal accounts but share rent, groceries and utilities for a home. Their financial information is spread across banking apps and a shared spreadsheet that is often out of date. They need a shared view of household finances to coordinate decisions. Savi’s household features help them review shared financial information, monitor expenses, and track progress toward common goals.
+
 
 #### Q3: Why would your users choose your product? What are they using today to solve their problem/need?
 
-> Short (1 - 2 min' read max)
- * We want you to "connect the dots" for us - Why does your product (as described in your answer to Q1) fits the needs of your users (as described in your answer to Q2)?
- * Explain the benefits of your product explicitly & clearly. For example:
-    * Save users time (how and how much?)
-    * Allow users to discover new information (which information? And, why couldn't they discover it before?)
-    * Provide users with more accurate and/or informative data (what kind of data? Why is it useful to them?)
-    * Does this application exist in another form? If so, how does your differ and provide value to the users?
-    * How does this align with your partner's organization's values/mission/mandate?
+Users would choose us because it strongly connects everyday spending and future planning in a single mobile app. For our target users, the benefit is being able to use their financial information to make practical decisions, whether they can afford a purchase, how their savings are progressing, or which expenses need attention.
+Some benefits:
+- Save time managing money: Savi brings account information, transactions, savings goals, and household finances into one app. Users can spend less time switching between banking apps or updating spreadsheets. One could review spending and savings progress in one session. This could save few minutes for every check. 
+- Discover spending patterns: Categorized transactions help users see where their money goes across accounts. One could discover several small dining purchases add up to a significant share of their monthly budget. This information is harder to recognize when transactions are scattered across different accounts.
+- Make better-informed plans: Current balances show how much money users have today, while financial projections help them explore how spending and saving could affect their future finances. Users could use this information to assess a vacation budget alongside their emergency savings goal. Projections are estimating whose usefulness depends on the available data and assumptions.
+
 
 #### Q4: What are the user stories that make up the Minumum Viable Product (MVP)?
 
@@ -72,10 +69,12 @@ Briefly describe which option you have agreed to.
 
 #### Q6: Have you met with your team?
 
-Do a team-building activity in-person or online. This can be playing an online game, meeting for bubble tea, lunch, or any other activity you all enjoy.
-* Get to know each other on a more personal level.
-* Provide a few sentences on what you did and share a picture or other evidence of your team building activity.
-* Share at least three fun facts from members of you team (total not 3 for each member).
+Yes, we have met with each other as a team both online and offline. We play online games together like roblox and DLS26. Some of us played badminton together at Atheletic Center during the weekends. We have already built group chat in both wechat and discord. Wechat for daily life discussions and not course related topics. Discord for course related and project related topics.
+
+Some Fun Facts:
+    Kevin is Saskatchewan Badminton Provincial Champion
+    Jerry's latest wake up time is 17:40
+    Kael will participate in North American Professional Delta Force Game
 
 
 #### Q7: What are the roles & responsibilities on the team?
@@ -93,13 +92,8 @@ List each team member and:
 
 #### Q8: How will you work as a team?
 
-Describe meetings (and other events) you are planning to have. 
- * When and where? Recurring or ad hoc? In-person or online?
- * What's the purpose of each meeting?
- * Other events could be coding sessions, code reviews, quick weekly sync meeting online, etc.
- * You should have 2 meetings with your project partner (if you have one) before D1 is due. Describe them here:
-   * You must keep track of meeting minutes and add them to your repo under "deliverables/minutes" folder
-   * You must have a regular meeting schedule established for the rest of the term.  
+We plan to have meeting twice a week, online or in-person depending on the needs. If the meeting is online, we will have it through discord and phone calls. If the meeting is in-person, we probably will pick one library we like to meet up. The purpose of the meeting is mainly to dicuss each other's university life, the progress of current project and the plan for the future week. The main goal is to combine everyone's idea to a more mature big goal. There are also online coding sessions, where everyone discussing their latest ideas and update the progress. We have three meetings before D1 is due. The first one was a brief group discussion on welcoming everyone to the team and chat about our goal on this project. The second one was about D1. we spread D1 into sections and assign each team member a part of it. We work together to finish D1. The third one will be more about the project, we extend the discussion from D1 to more deep into the project. We discuss details about the work for each team members and the existing codebase given by our partner.
+
   
 #### Q9: How will you organize your team?
 
