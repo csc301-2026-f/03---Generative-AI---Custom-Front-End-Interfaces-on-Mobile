@@ -33,20 +33,32 @@ Some benefits:
 - Make better-informed plans: Current balances show how much money users have today, while financial projections help them explore how spending and saving could affect their future finances. Users could use this information to assess a vacation budget alongside their emergency savings goal. Projections are estimating whose usefulness depends on the available data and assumptions.
 
 
-#### Q4: What are the user stories that make up the Minumum Viable Product (MVP)?
+#### Q4: What are the user stories that make up the Minimum Viable Product (MVP)?
 
- * At least 5 user stories concerning the main features of the application - note that this can broken down further
- * You must follow proper user story format (as taught in lecture) ```As a <user of the app>, I want to <do something in the app> in order to <accomplish some goal>```
- * User stories must contain acceptance criteria. Examples of user stories with different formats can be found here: https://www.justinmind.com/blog/user-story-examples/. **It is important that you provide a link to an artifact containing your user stories**.
- * If you have a partner, these must be reviewed and accepted by them. You need to include the evidence of partner approval (e.g., screenshot from email) or at least communication to the partner (e.g., email you sent)
+Our [MVP proposal v0.1 and full acceptance criteria](mvp.md) define the proposed release: monthly spending for one owned personal CAD account, three design choices, saved widgets, dashboard organization, selected-part editing with Undo, and reusable-template sharing. Dates are explicitly confirmed and limited to 1–12 completed calendar months. This proposal is prepared for team and Savi review; it is not yet partner-approved.
+
+1. **US-01 — Generate a supported view.** As a Savi personal-account user, I want to describe a monthly-spending view in order to understand my spending without building a report manually. **Acceptance:** confirm account and months; use authorized financial data; clarify ambiguous requests; reject unsupported input without saving a broken widget.
+2. **US-02 — Choose a design.** As a user, I want to compare three presentations in order to choose the clearest view of the same information. **Acceptance:** Bar, Line, and Donut use identical monthly values and total; choosing one saves exactly one private widget; cancelling saves nothing and retrying does not create duplicates.
+3. **US-03 — Reopen and refresh.** As a user, I want to reopen a saved widget in order to reuse the view without asking the AI to rebuild it. **Acceptance:** the selected definition survives restart; reopening makes no generation call; refresh uses the same fixed months; failure is distinguishable from zero spending.
+4. **US-04 — Organize the dashboard.** As a user, I want to pin, unpin, and reorder widgets in order to keep my most useful views easy to reach. **Acceptance:** generated and built-in widgets can be ordered together; placement survives restart on the same device; unpinning preserves the saved widget.
+5. **US-05 — Refine a selected part.** As a user, I want to refine a selected title or chart in order to personalize the widget without changing unrelated content. **Acceptance:** only an allowed title, Gold/Blue palette, or Bar/Line grid property changes; data bindings and unrelated nodes remain unchanged; invalid or stale edits preserve the last valid version.
+6. **US-06 — Undo a refinement.** As a user, I want to undo a successful refinement in order to recover the previous design. **Acceptance:** Undo restores the preceding stored definition without a model call; failed edits do not consume history; concurrent changes cannot be silently overwritten.
+7. **US-07 — Reuse a shared template.** As a Savi user, I want to share a reusable design in order to let another user apply it to their own spending. **Acceptance:** export excludes source identifiers, private amounts, custom text, and prompts/history; import validates the file and uses the recipient's own authorized account and confirmed months; the saved copy is private and independent.
+8. **US-08 — Remove a widget.** As a user, I want to remove a widget I no longer need in order to keep my library and dashboard organized. **Acceptance:** confirmation removes it from both surfaces and blocks normal read/edit/export; cancellation changes nothing; removal does not claim permanent database erasure or delete imported copies.
+9. **US-09 — Recover from failure.** As a user, I want clear loading and failure states in order to recover without losing saved work. **Acceptance:** bounded requests expose actionable retry states; persistence is confirmed before success is shown; accessible controls and readable chart values work across the supported flows.
+
+**Sharing change for review:** earlier project planning made snapshot sharing core and reusable definitions bonus. This proposal includes reusable sharing and proposes deferring image export. Partner agreement and reconciliation with course expectations are required before accepting that replacement; the earlier snapshot obligation remains unresolved until then.
+
+**Partner-review evidence: pending.** Add a link to the actual review message, meeting record, or approval when it exists. Preparing this proposal does not establish that it has been communicated to or accepted by the partner.
 
 #### Q5: Have you decided on how you will build it? Share what you know now or tell us the options you are considering.
 
-> Short (1-2 min' read max)
- * What is the technology stack? Specify languages, frameworks, libraries, PaaS products or tools to be used or being considered. 
- * How will you deploy the application?
- * Describe the architecture - what are the high level components or patterns you will use? Diagrams are useful here. 
- * Will you be using third party applications or APIs? If so, what are they?
+We propose extending the existing Savi app and backend. The [MVP proposal](mvp.md) contains the architecture diagram, source-code audit, contracts, workstreams, and acceptance fixtures.
+
+- **Stack and reuse:** TypeScript, React Native, Expo, existing Savi styling/state patterns, Go JSON-RPC services, and MongoDB. Reuse card/text components and adapt existing Bar/Line charts; add an approved native Donut adapter. The current generator uses OpenRouter; model/provider configuration remains a Savi engineering decision.
+- **Architecture:** mobile screens call a widget service and authenticated backend. A bounded generation pipeline interprets intent; application code validates ownership, obtains monthly spending, and supplies one dataset to three native presentations. Add candidate/commit operations because existing creation immediately saves. Persist private definitions and revision history on the server; keep dashboard pin/order metadata local to the device. Constrained property patches support selected editing and Undo. Sanitized templates import against the recipient's own account.
+- **Verification and deployment:** develop with local backend/test accounts and a compatible Expo development client. Use shared fixtures, focused mobile/Go tests, real-service integration checks, and iOS/Android walkthroughs; run applicable repository gates. Integrate behind a feature flag through Savi's existing mobile/backend release process after review. No new banking integration or separate public hosting platform is required. The [Figma mockup](<Mockup/CSC301 — AI Widgets Prototype/readme.md>) remains the immediately accessible D1 demo, distinct from the implemented MVP.
+
 
 ----
 ## Intellectual Property Confidentiality Agreement 
@@ -174,4 +186,4 @@ The team will prioritize the features required for a complete end-to-end user fl
 
 ## AI Tools Used
 
-We used ChatGPT to help brainstorm, organize, and refine wording for parts of the D1 planning document. All generated content was reviewed, edited, and verified by the team before submission.
+We used ChatGPT to help brainstorm, organize, and refine wording for parts of the D1 planning document. Source-code inspection informed the new MVP proposal v0.1 and Q4/Q5 additions. These additions remain proposed and require team review and partner scope acceptance before being treated as the agreed plan.
