@@ -62,19 +62,12 @@ We propose extending the existing Savi app and backend. The [MVP proposal](mvp.m
 
 ----
 ## Intellectual Property Confidentiality Agreement 
-> Note this section is **not marked** but must be completed briefly if you have a partner. If you have any questions, please ask on Piazza.
->  
-**By default, you own any work that you do as part of your coursework.** However, some partners may want you to keep the project confidential after the course is complete. As part of your first deliverable, you should discuss and agree upon an option with your partner. Examples include:
+
 1. You can share the software and the code freely with anyone with or without a license, regardless of domain, for any use.
 2. You can upload the code to GitHub or other similar publicly available domains.
-3. You will only share the code under an open-source license with the partner but agree to not distribute it in any way to any other entity or individual. 
-4. You will share the code under an open-source license and distribute it as you wish but only the partner can access the system deployed during the course.
-5. You will only reference the work you did in your resume, interviews, etc. You agree to not share the code or software in any capacity with anyone unless your partner has agreed to it.
+3. You will only reference the work you did in your resume, interviews, etc. You agree to not share the code or software in any capacity with anyone unless your partner has agreed to it.
 
-**Your partner cannot ask you to sign any legal agreements or documents pertaining to non-disclosure, confidentiality, IP ownership, etc.**
-
-Briefly describe which option you have agreed to.
-
+After the discussion, all the team members agree to the option 1,2,3 as stated above.
 ----
 
 ## Teamwork Details
@@ -91,16 +84,11 @@ Some Fun Facts:
 
 #### Q7: What are the roles & responsibilities on the team?
 
-Describe the different roles on the team and the responsibilities associated with each role (e.g., frontend, database). 
- * Roles should reflect the structure of your team and be appropriate for your project. One person may have multiple roles.  
- * Add role(s) to your Team-[Team_Number]-[Team_Name].csv file on the main folder.
- * At least one person must be identified as the dedicated partner liaison. They need to have great organization and communication skills.
- * Everyone must contribute to code. Students who don't contribute to code enough will receive a lower mark at the end of the term.
+We divided the project work by use case, with each team member taking responsibility for specific features. Kevin and Yifei will be responsible for generating supported views, including prompt input, account and month confirmation, authorized data retrieval, and request validation. Ziheng will handle widget removal, including confirming the action, removing the widget from both surfaces, and blocking subsequent access. Ethan will be responsible for reopening and refreshing widgets, as well as organizing the dashboard. This includes saving and loading widget definitions, reopening widgets without regenerating them, and refreshing data for the selected fixed months.
 
-List each team member and:
- * A description of their role(s) and responsibilities including the components they'll work on and non-software related work
- * Why did you choose them to take that role? Specify if they are interested in learning that part, experienced in it, or any other reasons. Do no make things up. This part is not graded but may be reviewed later.
+Each teammate will have the chance to work on both the frontend and backend. Since our project involves AI, everyone will also have opportunities to use AI tools and develop AI-powered features. We divided the work based on each team member’s interests, allowing everyone to choose an area they enjoyed and wanted to explore. This gives each member an opportunity to build their skills while contributing to our shared goal. Although we have individual responsibilities, we also agreed to support one another whenever someone needs help.
 
+Beyond coding, Kevin serves as our team leader and dedicated partner liaison. Kevin, Ziheng, and Yifei take on more responsibility for documentation. Ethan contributes to brainstorming and developing the project’s initial structure. Tina and Kael help coordinate communication among team members and organize group meetings.
 
 #### Q8: How will you work as a team?
 
