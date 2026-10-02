@@ -1,6 +1,4 @@
 # Savi Finance Mobile App - 404 Team Name Not Found
-> _Note:_ This document will evolve throughout your project. You commit regularly to this file while working on the project (especially edits/additions/deletions to the _Highlights_ section). 
- > **This document will serve as a master plan between your team, your partner and your TA.**
 
 ## Product Details
  
@@ -35,7 +33,7 @@ Some benefits:
 
 #### Q4: What are the user stories that make up the Minimum Viable Product (MVP)?
 
-Our [MVP proposal v0.1 and full acceptance criteria](mvp.md) define the proposed release: monthly spending for one owned personal CAD account, three design choices, saved widgets, dashboard organization, selected-part editing with Undo, and reusable-template sharing. Dates are explicitly confirmed and limited to 1–12 completed calendar months. This proposal is prepared for team and Savi review; it is not yet partner-approved.
+Our [MVP proposal v0.1 and full acceptance criteria](mvp.md) define the proposed release: monthly spending for one owned personal CAD account, three design choices, saved widgets, dashboard organization, selected-part editing with Undo, and reusable-template sharing. Dates are explicitly confirmed and limited to 1–12 completed calendar months.
 
 1. **US-01 — Generate a supported view.** As a Savi personal-account user, I want to describe a monthly-spending view in order to understand my spending without building a report manually. **Acceptance:** confirm account and months; use authorized financial data; clarify ambiguous requests; reject unsupported input without saving a broken widget.
 2. **US-02 — Choose a design.** As a user, I want to compare three presentations in order to choose the clearest view of the same information. **Acceptance:** Bar, Line, and Donut use identical monthly values and total; choosing one saves exactly one private widget; cancelling saves nothing and retrying does not create duplicates.
@@ -43,13 +41,10 @@ Our [MVP proposal v0.1 and full acceptance criteria](mvp.md) define the proposed
 4. **US-04 — Organize the dashboard.** As a user, I want to pin, unpin, and reorder widgets in order to keep my most useful views easy to reach. **Acceptance:** generated and built-in widgets can be ordered together; placement survives restart on the same device; unpinning preserves the saved widget.
 5. **US-05 — Refine a selected part.** As a user, I want to refine a selected title or chart in order to personalize the widget without changing unrelated content. **Acceptance:** only an allowed title, Gold/Blue palette, or Bar/Line grid property changes; data bindings and unrelated nodes remain unchanged; invalid or stale edits preserve the last valid version.
 6. **US-06 — Undo a refinement.** As a user, I want to undo a successful refinement in order to recover the previous design. **Acceptance:** Undo restores the preceding stored definition without a model call; failed edits do not consume history; concurrent changes cannot be silently overwritten.
-7. **US-07 — Reuse a shared template.** As a Savi user, I want to share a reusable design in order to let another user apply it to their own spending. **Acceptance:** export excludes source identifiers, private amounts, custom text, and prompts/history; import validates the file and uses the recipient's own authorized account and confirmed months; the saved copy is private and independent.
-8. **US-08 — Remove a widget.** As a user, I want to remove a widget I no longer need in order to keep my library and dashboard organized. **Acceptance:** confirmation removes it from both surfaces and blocks normal read/edit/export; cancellation changes nothing; removal does not claim permanent database erasure or delete imported copies.
-9. **US-09 — Recover from failure.** As a user, I want clear loading and failure states in order to recover without losing saved work. **Acceptance:** bounded requests expose actionable retry states; persistence is confirmed before success is shown; accessible controls and readable chart values work across the supported flows.
+7. **US-07 — Remove a widget.** As a user, I want to remove a widget I no longer need in order to keep my library and dashboard organized. **Acceptance:** confirmation removes it from both surfaces and blocks normal read/edit/export; cancellation changes nothing; removal does not claim permanent database erasure or delete imported copies.
 
-**Sharing change for review:** earlier project planning made snapshot sharing core and reusable definitions bonus. This proposal includes reusable sharing and proposes deferring image export. Partner agreement and reconciliation with course expectations are required before accepting that replacement; the earlier snapshot obligation remains unresolved until then.
-
-**Partner-review evidence: pending.** Add a link to the actual review message, meeting record, or approval when it exists. Preparing this proposal does not establish that it has been communicated to or accepted by the partner.
+**Partner-review evidence:**
+![photo4](./images/photo4.png)
 
 #### Q5: Have you decided on how you will build it? Share what you know now or tell us the options you are considering.
 
@@ -128,8 +123,10 @@ We will also work closely with Savi Finance’s engineering and product team for
 
 #### Q12. How does your project fit within the overall product from the partner?
 Our project extends the existing Savi Finance mobile platform by adding AI-generated, customizable financial dashboard widgets. It is not a standalone application or a completely new product. Instead, it builds on Savi Finance’s existing mobile application, backend services, financial data infrastructure, and widget-generation functionality.
-Savi Finance already has a React Native mobile application and a Go backend with APIs for creating, retrieving, updating, undoing, and deleting generated widgets. The backend can already generate and store structured widget definitions, but the full mobile experience for consuming and interacting with these AI-generated widgets is not yet complete. Our team’s role is therefore to connect these existing capabilities into a usable end-to-end mobile feature.    TEAM_TECHNICAL_ARCHITECTURE
-Our work will focus on the product experience around AI-generated widgets, including allowing users to generate widgets from natural-language prompts, render them safely in the mobile application, save and reopen them, pin and organize them on the dashboard, modify them, and share them. The Savi Finance team will continue to provide the existing platform, backend infrastructure, design system, and technical guidance that our work integrates with.    TEAM_MVP
+Savi Finance already has a React Native mobile application and a Go backend with APIs for creating, retrieving, updating, undoing, and deleting generated widgets. The backend can already generate and store structured widget definitions, but the full mobile experience for consuming and interacting with these AI-generated widgets is not yet complete. Our team’s role is therefore to connect these existing capabilities into a usable end-to-end mobile feature.
+#### TEAM_TECHNICAL_ARCHITECTURE
+Our work will focus on the product experience around AI-generated widgets, including allowing users to generate widgets from natural-language prompts, render them safely in the mobile application, save and reopen them, pin and organize them on the dashboard, modify them, and share them. The Savi Finance team will continue to provide the existing platform, backend infrastructure, design system, and technical guidance that our work integrates with.    
+#### TEAM_MVP
 At this stage, Savi Finance considers the project successful if we can turn the existing prototype and backend functionality into a usable end-to-end feature within the real Savi mobile application. The longer-term goal is for the feature to be production-ready and eventually launched as part of the Savi Finance platform, rather than remaining only as a standalone prototype.
 
 ## Potential Risks
