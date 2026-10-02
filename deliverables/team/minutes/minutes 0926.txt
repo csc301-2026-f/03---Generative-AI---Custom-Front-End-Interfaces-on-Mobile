@@ -1,0 +1,8 @@
+Date: 09/26/2026
+Attendees: All team members
+Discussion: Deliverable1 ideas
+Decision: Finish the draft for planning.md before Wednesday
+Action item: Kevin and Yifei will complete general questions by Wednesday; 
+Ziheng, Junhua, and Yiting will complete rough mock-up prototype by Sunday; 
+Ethan will review and refine mock-up prototype by Monday; 
+Everyone will complete user stories and MVP together by Wednesday
