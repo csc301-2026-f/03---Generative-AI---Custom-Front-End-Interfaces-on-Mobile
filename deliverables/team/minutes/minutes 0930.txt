@@ -1,0 +1,5 @@
+Date: 09/30/2026
+Attendees: All team members
+Discussion: User stories and roles
+Decision: Assign each member a use case as listed in planning.md
+Action item: No action items
