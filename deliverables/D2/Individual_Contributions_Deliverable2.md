@@ -4,4 +4,17 @@
 **Contributions:**
 - Implemented widget removal across both the library and the dashboard: removed widgets can no longer be opened, edited or exported, while imported copies are kept and no data is permanently erased ([PR #6602]).
 - - Built the removal interaction: a ⋯ menu on the widget's top-right corner, with confirmation, cancellation with no side effects, and undo ([PR #6602]). Currently reworking it into drag-to-remove for a faster flow (in progress, not part of the D2 release).
+## Yifei Yang
+
+**Role:** Owned US-01 (Generate a supported financial view) end to end, from natural-language request interpretation to backend-backed widget generation and mobile integration.
+
+**Contributions:**
+
+- Implemented and integrated the US-01 generation flow, including natural-language request handling, account/month scope confirmation, backend financial data retrieval, and structured widget responses for the mobile app.
+
+- Extended the supported financial views beyond category spending to include monthly expense total, expense trend, expense comparison, and transaction list, while keeping the data generation deterministic and backend-backed rather than model-generated.
+
+- Worked on the READY response structure used by the mobile UI, including the widget artifact, query plan, and financial snapshot, and helped validate that the generated results could be rendered correctly in the existing Savi workflow.
+
+- Contributed to integration testing, debugging, and validation of the complete US-01 flow before the partner demo, including resolving issues between the AI request flow, backend logic, and mobile interface.
 
