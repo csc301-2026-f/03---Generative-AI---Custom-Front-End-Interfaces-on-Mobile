@@ -1,137 +1,87 @@
 # Savi AI Widgets — 404 Team Name Not Found
 
-## Partner Intro
+Savi AI Widgets extends Savi Finance's mobile app with financial widgets created from natural-language requests. Users can describe the information they need, preview a supported design, and reuse it in their dashboard rather than repeatedly configuring charts or prompting the AI.
 
-- **Partner organization:** Savi Finance
+This repository contains Team 3's CSC301 deliverable documents. The application code lives in the partner's private [Savi Finance codebase](https://github.com/cheapreats/ce). Our scope is the AI-widget workflow; Savi's existing banking integrations and other finance features are provided by the partner.
+
+## Partner
+
+- **Organization:** Savi Finance
 - **Primary contact:** Ralph Maamari
-- **Title:** Chief Executive Officer
 - **Email:** ralphpalxyz@gmail.com
-- **Secondary contact:** Not designated
 
-Savi Finance is a personal finance platform that helps individuals and households organize accounts, understand spending, and track savings goals. Our team is extending its existing mobile application with customizable AI-generated financial widgets.
+Savi Finance helps individuals and households organize accounts, understand spending, and track savings goals. Our work adds customizable financial views to the existing mobile experience.
 
-## Description about the Project
+## D2 Features and Evidence
 
-Savi AI Widgets allows users to describe the financial information they want to see and create a personalized dashboard widget.
+The following features are implemented in team feature branches and demonstrated through the partner review. Inclusion in a particular app build depends on integration of the corresponding branches; these links identify the implementation evidence, rather than a published D2 build.
 
-Fixed dashboards do not suit every user's needs. This feature helps users create, save, refine, and reuse useful financial views without manually configuring charts and other components.
+| Use case | User-facing behavior | Implementation evidence |
+| --- | --- | --- |
+| Generate a supported financial view | Describe a view in Ask Savi, confirm the account and period, and preview financial data retrieved by the backend. Supported views include category spending, monthly expense total, expense trend, expense comparison, and transaction list. | [PR #6593](https://github.com/cheapreats/ce/pull/6593) |
+| Compare and save designs | Preview alternative presentations and save a preferred widget design. | [PR #6598](https://github.com/cheapreats/ce/pull/6598) |
+| Reopen and refresh saved widgets | Load a saved widget without regenerating its design. Refresh its authorized financial data while preserving the saved layout. | [PR #6586](https://github.com/cheapreats/ce/pull/6586) |
+| Manage widget visibility | Browse built-in, local, and saved native widgets in one library; show or hide entries on Overview while retaining them in the library. | [US-03 documentation](https://github.com/cheapreats/ce/tree/fcf6f277ca8e46b70e556ecdf5ec0a4777d7229d/docs/ai-widgets/US-03) |
+| Refine a saved widget | Request a supported change, compare the preview, and use Undo/Redo while reviewing refinements. | [PR #6736](https://github.com/cheapreats/ce/pull/6736) |
+| Remove an unwanted widget | Remove a widget from the library and dashboard with confirmation, cancellation, and undo support. | [PR #6602](https://github.com/cheapreats/ce/pull/6602) |
 
-The project is currently under development. The proposed features and final release scope remain subject to team and partner review.
+The team recorded a demonstration of widget creation, refinement, preview comparison, and Undo/Redo. The partner accepted the basic functionality and requested UI improvements. See the [D2 review](deliverables/D2/iteration-02-review.md) for feedback and remaining integration work.
 
-## Key Features
+## Using the Widget Workflow
 
-The planned MVP includes:
+These steps describe the feature workflow in a team-enabled Savi test build. Sign in with an authorized test account containing sample financial data. An ordinary production installation may not contain the team's feature branches.
 
-- **Generate a financial widget:** Describe a financial view in natural language. The system asks clarification questions when needed and creates a design using supported components.
-- **Preview and choose a design:** Compare up to three presentations of the requested information and save the preferred design.
-- **Save, reopen, and refresh:** Reopen saved widgets without regenerating their designs and refresh the associated financial data.
-- **Organize the dashboard:** Pin, unpin, and reorder widgets alongside existing dashboard widgets.
-- **Refine selected sections:** Select part of a widget and request a supported change while preserving unrelated content.
-- **Undo refinements:** Restore the previous saved design after an accepted change.
-- **Remove widgets:** Remove unwanted widgets from the saved collection and dashboard.
+### Create a financial view
 
-Supported financial information may include transactions, income and expenses, account balances, and savings-goal progress. The exact supported requests, editing boundaries, and sharing method will be confirmed with the partner.
+1. Open **Ask Savi** and enter a request such as “Show my monthly expenses by category.”
+2. Select or confirm the requested account and month when prompted. Use an account and period containing sample transactions.
+3. Review the generated preview. Check its account, period, category labels, and amounts against the selected financial context.
+4. Where alternative designs are available, compare their presentations and save the preferred design. Use **Add to Home** when offered to display a generated snapshot on Home.
 
-## Instructions
+**Expected result:** The app displays the requested supported view using backend financial data. If the selected period has no eligible expenses, it displays an empty-data message instead of fabricated values.
 
-### Access the System
+### Reopen and organize widgets
 
-The feature is being developed within the existing Savi Finance mobile application. A deployed version of the AI-widget feature is not yet available.
+1. Open **Customize Widgets** and locate a saved widget using the library's search or filters.
+2. Open it to view the saved design with refreshed financial data; refreshing does not require generating a new design.
+3. Use the eye control to show or hide the widget on Overview. Return to Overview to check the result.
 
-For development and testing, obtain access to the project repositories and an authorized test account, then follow the development setup below.
+**Expected result:** Hiding a widget removes it from Overview while keeping it available in the library. Saved native widgets and device-local Home snapshots use different storage paths; local snapshots are scoped to the profile and cleared on sign-out.
 
-### Planned User Flow
+### Refine or remove a widget
 
-Once implemented, users will be able to:
+1. Open a saved widget and request a supported refinement to its presentation.
+2. Review the proposed preview before accepting it. Use Undo/Redo to compare the available revisions.
+3. To remove a widget, open its menu and choose removal. First cancel to check that it remains available, then confirm removal and check the library and dashboard. Use undo if offered.
 
-1. Sign in to Savi Finance and open the AI-widget creation interface.
-2. Describe the financial view they want to create.
-3. Answer any clarification questions about the account, date range, or information required.
-4. Review the generated designs and choose one to save.
-5. Reopen the saved widget and refresh its financial data.
-6. Pin, unpin, or reorder the widget on the dashboard.
-7. Select a section to refine and use Undo to restore the previous design if needed.
-8. Remove unwanted widgets after confirming the action.
+**Expected result:** Refinement allows a preview before acceptance. Removal affects the selected widget; imported copies remain independent. Drag-to-remove is ongoing work and is not part of the documented D2 release scope.
 
-Exact screen names, account setup instructions, and feature walkthroughs will be added as implementation progresses.
+## How It Works
 
-## Development Requirements
+- **Mobile:** TypeScript, React Native, Expo, Styled Components, and Savi's existing UI components.
+- **Backend:** Go services built with Bazel, including RPC handlers for generation and saved-widget operations.
+- **AI integration:** The server uses the shared OpenRouter client to interpret requests and produce bounded presentation choices. Financial values come from backend queries and aggregation rather than model-generated amounts.
+- **Widget contract:** Native component definitions describe the design, query plans describe the financial data needed, and snapshots provide the values to render. Frontend and backend validation constrain supported components and bindings.
+- **Storage:** Saved native widgets support backend loading and refresh. The initial Add to Home flow also supports device-local, profile-scoped snapshots.
 
-### Technologies
+For implementation details, see the [widget architecture and user flows](https://github.com/cheapreats/ce/tree/fcf6f277ca8e46b70e556ecdf5ec0a4777d7229d/docs/ai-widgets/US-03) and the implementation PRs above. Developers should follow the partner repository's [setup instructions](https://github.com/cheapreats/ce#readme), which cover its service dependencies and mobile environment. This course repository does not contain a runnable copy of the application.
 
-- **React Native:** Mobile application frontend.
-- **Go:** Backend API.
-- **Styled Components:** Styling for React Native components.
-- **Git:** Source control and collaboration.
-- **Gemini Flash / Antigravity:** Currently identified for AI-related work; their role in development and the application's runtime configuration requires confirmation.
+## Git and GitHub Workflow
 
-### Local Setup
+1. Split work by use case and agree on the shared widget structures and interfaces before connecting dependent features.
+2. Develop focused changes on descriptive feature or fix branches. When work depends on another feature branch, use stacked PRs and make the dependency explicit.
+3. Include the change's purpose, relevant tests, and UI screenshots in the PR. Run the partner repository's required checks, including `make presubmit`, and the relevant mobile, backend, or hermetic tests.
+4. Review changes through GitHub, resolve comments and integration conflicts, and merge dependencies in order under the partner's repository policies.
+5. Keep course deliverable documents in this repository and implementation code in the partner repository. Record process lessons and partner feedback in the iteration review.
 
-Developers should install:
+Tests contributed across the widget work include mobile component/service tests, backend handler and RPC tests, and hermetic integration scenarios. Test results belong to the individual PR revisions; they do not by themselves establish that every feature has been integrated into one release.
 
-- Node.js and the package manager required by the frontend repository.
-- Go.
-- Git.
-- A compatible Android emulator, iOS simulator, or physical test device.
-- Any additional tools required by the existing Savi application.
+## Deliverable Documents
 
-To prepare the development environment:
+- [D2 individual contributions](deliverables/D2/Individual_Contributions_Deliverable2.md)
+- [D2 review and retrospective](deliverables/D2/iteration-02-review.md)
+- [D1 MVP specification](deliverables/D1/mvp.md)
+- [D1 technical design](deliverables/D1/technical-design.md)
+- [D1 implementation and validation plan](deliverables/D1/implementation-and-validation-plan.md)
 
-1. Obtain access to the frontend and backend repositories.
-2. Clone the repositories to your local machine.
-3. Install frontend dependencies using the repository's package manager and lockfile.
-4. Download backend dependencies using `go mod download` from the directory containing `go.mod`.
-5. Configure the required environment variables using the project's setup instructions.
-6. Start the backend and configure the frontend to connect to it.
-7. Run the mobile application on a supported emulator, simulator, or test device.
-
-Exact commands, supported software versions, and configuration examples will be documented once the project setup is finalized.
-
-### External Dependencies and Third-Party Software
-
-The project uses React Native, Styled Components, and external Go modules. Additional mobile packages and AI services will be documented as they are confirmed.
-
-Frontend dependencies will be tracked in the package manifest and lockfile. Backend dependencies will be tracked in `go.mod` and `go.sum`. Required API keys and environment variables will be documented without committing secret values to the repository.
-
-## Deployment and GitHub Workflow
-
-### Task Management
-
-Jira is the main task-management tool. Larger features will be divided into smaller tickets with assigned owners and priorities. GitHub pull requests will track code changes, while Slack and meeting minutes will record blockers, decisions, and partner feedback.
-
-### Proposed GitHub Workflow
-
-1. Create a branch from the repository's agreed integration branch for each task.
-2. Use descriptive branch names such as `feat/<ticket-id>-<description>` or `fix/<ticket-id>-<description>`.
-3. Make focused commits and complete the checks relevant to the change.
-4. Open a pull request linking the Jira ticket and describing the change and validation.
-5. Have at least one other team member review the pull request.
-6. Address review comments before the author or designated maintainer merges it, subject to repository permissions.
-
-This workflow keeps changes reviewable and helps identify integration problems before they enter the shared codebase. Final branch rules and partner review requirements will follow Savi's repository policies.
-
-### Deployment
-
-Development and testing will initially use local environments and authorized test accounts. The feature is intended to be integrated into Savi's existing mobile and backend release process.
-
-Deployment tools, release responsibilities, and distribution instructions will be confirmed with the partner.
-
-## Coding Standards and Guidelines
-
-Follow the existing Savi codebase conventions, use descriptive names, and keep changes focused. Format Go code with `gofmt` and use the frontend's configured formatting and linting tools. Validate generated widget definitions before rendering them and document important API or configuration changes.
-
-## Licenses
-
-The project's license and distribution permissions have not yet been confirmed. The team will clarify these with Savi Finance before adding a license or distributing the code.
-
-Third-party dependencies remain subject to their respective licenses.
-
-## Deployed URL / Access Instructions
-
-The AI-widget feature is not yet deployed. Developers and reviewers currently require repository access and an authorized local testing environment.
-
-TestFlight, APK, emulator, and API testing instructions will be added when a testable build is available.
-
-## D3 Improvement Highlight
-
-To be completed for D3. This section will briefly describe the changes since D2 and explain where reviewers can find and test them.
+The D1 documents record the broader MVP plan. The D2 feature table and implementation evidence above describe this iteration's work; planned sharing and other future capabilities should not be assumed available in a D2 build.
