@@ -20,7 +20,7 @@
 
 ## Kaiwen Yang
 
-**Role:** Generating Support View for AI-generated spending widgets in the Savi mobile app.
+**Role:** Generating Support View（US-01) for AI-generated spending widgets in the Savi mobile app.
 
 **Contributions:**
 
