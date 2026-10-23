@@ -18,7 +18,7 @@
 
 - Contributed to integration testing, debugging, and validation of the complete US-01 flow before the partner demo, including resolving issues between the AI request flow, backend logic, and mobile interface.
 
-## Kaiwen Yang — 1010855200
+## Kaiwen Yang
 
 **Role:** Generating Support View for AI-generated spending widgets in the Savi mobile app.
 
