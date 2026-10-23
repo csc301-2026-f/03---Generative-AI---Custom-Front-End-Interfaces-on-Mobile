@@ -18,3 +18,14 @@
 
 - Contributed to integration testing, debugging, and validation of the complete US-01 flow before the partner demo, including resolving issues between the AI request flow, backend logic, and mobile interface.
 
+## Kaiwen Yang — 1010855200
+
+**Role:** Generating Support View for AI-generated spending widgets in the Savi mobile app.
+
+**Contributions:**
+
+- Implemented the monthly-expense widget creation flow, including the mobile creation screen, request/service layer, and `generateSupportedWidgetView` backend RPC with expense aggregation, intent parsing, and request validation.
+- Built chart previews and widget composition rendering; added local widget saving and display on the home screen.
+- Integrated widget creation into Ask Savi through an interactive chat card and the `prepare_spending_widget` tool; preserved the user's original prompt when opening the creation flow from chat.
+- Fixed widget-creation navigation and model-request routing; added support for native widget draft responses in the backend and mobile service.
+- Added mobile component/service tests, backend handler and RPC-registration tests, and hermetic tests for widget generation and chat integration; documented the widget request contract.

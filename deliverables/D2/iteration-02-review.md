@@ -1,53 +1,37 @@
-# Your Team Number and Name
+# Team 3 — 404 Team Name Not Found
 
- > _Note:_ This document is meant to be written during (or shortly after) your review meeting, which should happen fairly close to the due date.      
- >      
- > _Suggestion:_ Have your review meeting a day or two before the due date. This way you will have some time to go over (and edit) this document, and all team members should have a chance to make their contribution.
+## Iteration 02 - Review & Retrospect
 
-
-## Iteration XX - Review & Retrospect
-
- * When: FILL IN THE DATE WHEN YOU ACTUALLY HAD YOUR REVIEW MEETING
- * Where: PHYSICAL LOCATION AND/OR ONLINE
+- When: Oct 24th
+- Where: Online
 
 ## Process - Reflection
 
-
 #### Q1. What worked well
 
-List **process-related** (i.e. team organization and how you work) decisions and actions that worked well.
-
-
- * 2 - 4 important decisions, processes, actions, or anything else that worked well for you, ordered from most to least important.
- * Give a supporting argument about what makes you think that way.
- * Feel free to refer/link to process artifact(s).
+- Splitting use cases during Deliverable 1 gave each member clear feature ownership and time to design and implement their component independently.
+- A shared JSON widget format helped connect independently developed components. Stacked PRs, automated checks, and screenshots supported code review and integration.
+- Collaborative debugging and testing of the mobile UI and backend widget flow before the demo helped stabilize the main workflow.
 
 #### Q2. What did not work well
 
-List **process-related** (i.e. team organization and how you work) decisions and actions that did not work well.
-
- * 2 - 4 important decisions, processes, actions, or anything else that did not work well for you, ordered from most to least important.
- * Give a supporting argument about what makes you think that way.
- * Feel free to refer/link to process artifact(s).
-
+- Shared contracts and architecture were not fully agreed on before implementation, and changes were not always communicated early enough. This created extra coordination work between connected use cases.
+- Integration happened later than expected, and dependent branches complicated the merge process, leaving less time for end-to-end testing before the demo.
+- Local environment and emulator setup, differences between local checks and GitHub CI, and a PR description policy failure required additional troubleshooting and follow-up fixes.
 
 #### Q3(a). Planned changes
 
-List any **process-related** (i.e. team organization and/or how you work) changes you are planning to make (if there are any)
-
- * Ordered from most to least important, with supporting argument explaining a change.
+- Hold a short interface-design meeting before implementation to agree on shared contracts and architecture, and communicate subsequent changes regularly to reduce integration rework.
+- Integrate dependent features and run end-to-end tests throughout the iteration, merging dependencies in order so issues surface earlier.
+- Keep local development environments ready and validate CI and PR requirements before submission to reduce avoidable delays.
+- Conduct earlier UI walkthroughs to identify usability issues and improve feedback after user actions.
 
 #### Q3(b). Integration & Next steps
-Briefly explain how you integrated the previously developed individuals components as one product (i.e. How did you split the work across your team) and how was the work integrated together.
 
- * Keep this very short (1-3 lines).
-
+We divided widget creation, design selection, management, removal, and refinement across teammates, connecting the mobile UI, backend financial data, and widget generation through shared JSON contracts and stacked PRs. Next, we will complete the remaining integration into the partner's main branch and test the combined workflow.
 
 ## Product - Review
 
 #### Q4. How was your product demo?
- * How did you prepare your demo?
- * What did you manage to demo to your partner?
- * Did your partner accept the features? And were there change requests?
- * What were your learnings through this process? This can be either from a process and/or product perspective.
- * *This section will be marked very leniently so keep it brief and just make sure the points are addressed*
+
+We tested the main AI widget workflow and prepared a short video showing widget creation, refinement, preview comparison, and Undo/Redo, while explaining each member's role. Our partner accepted the basic functionality and said we were on the right track, while requesting improvements to the UI experience. Some final integration into the partner's main branch was still pending. We learned to allow more time for end-to-end integration and to make the user flow and feedback after each action clearer.
