@@ -56,3 +56,16 @@ I built on the existing AI Widgets work and Savi components, combining implement
 - **Testing and documenting the work:** Added and extended mobile and backend tests, including four saved-widget hermetic integration scenarios. Checked the interface in the iOS simulator, prepared screenshots for review, documented the architecture, API contract, and user flows, and resolved conflicts while integrating upstream changes.
 
 **Evidence:** [PR #6586](https://github.com/cheapreats/ce/pull/6586) and [US-03 documentation](https://github.com/cheapreats/ce/tree/fcf6f277ca8e46b70e556ecdf5ec0a4777d7229d/docs/ai-widgets/US-03).
+
+## US-02
+
+**Name:**
+
+**Role:** Implemented US-02 (Choose a design), covering preview comparison and saving the selected widget design.
+
+**Contributions:**
+
+- Built the design-selection interface for comparing alternative native previews of the requested financial view.
+- Connected design selection to the save flow so users can save their preferred widget design.
+
+**Evidence:** [PR #6598](https://github.com/cheapreats/ce/pull/6598).
