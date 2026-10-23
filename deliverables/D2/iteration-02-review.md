@@ -1,4 +1,4 @@
-# Team 12 — Savi Finance
+# Team 03 — Savi Finance
 
 ## Iteration 02 - Review & Retrospect
 
