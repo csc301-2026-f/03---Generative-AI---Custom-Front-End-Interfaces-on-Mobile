@@ -1,53 +1,52 @@
-# Your Team Number and Name
+# Team 12 — Savi Finance
 
- > _Note:_ This document is meant to be written during (or shortly after) your review meeting, which should happen fairly close to the due date.      
- >      
- > _Suggestion:_ Have your review meeting a day or two before the due date. This way you will have some time to go over (and edit) this document, and all team members should have a chance to make their contribution.
+## Iteration 02 - Review & Retrospect
 
-
-## Iteration XX - Review & Retrospect
-
- * When: FILL IN THE DATE WHEN YOU ACTUALLY HAD YOUR REVIEW MEETING
- * Where: PHYSICAL LOCATION AND/OR ONLINE
+- When: To be confirmed by the team.
+- Where: To be confirmed by the team.
 
 ## Process - Reflection
 
-
 #### Q1. What worked well
 
-List **process-related** (i.e. team organization and how you work) decisions and actions that worked well.
+**Yucheng (Ethan) — US-03**
 
-
- * 2 - 4 important decisions, processes, actions, or anything else that worked well for you, ordered from most to least important.
- * Give a supporting argument about what makes you think that way.
- * Feel free to refer/link to process artifact(s).
+- **Agreeing on a shared widget structure:** After I proposed the widget architecture, my teammates were willing to discuss it and adjust their implementations around a common definition. This helped connect features that had initially been developed separately. Agreeing on the structures and interfaces also let everyone retain flexibility in how they implemented their own functionality.
+- **Reusing the existing application:** Building on Savi's components and infrastructure reduced unnecessary changes and helped the new library and saved-widget functionality remain compatible with the existing system. Examining working code also gave me useful examples while learning the stack.
+- **Regular, supportive communication:** We generally held weekly online meetings lasting 30–40 minutes to share progress and discuss questions. I used these meetings to explain the architecture and coordinate how other features would use it. Responsibilities felt clear, and I did not experience major delays caused by teammates or communication problems.
 
 #### Q2. What did not work well
 
-List **process-related** (i.e. team organization and how you work) decisions and actions that did not work well.
+**Yucheng (Ethan) — US-03**
 
- * 2 - 4 important decisions, processes, actions, or anything else that did not work well for you, ordered from most to least important.
- * Give a supporting argument about what makes you think that way.
- * Feel free to refer/link to process artifact(s).
+- **We started without a shared definition of a widget:** Some features could begin independently, but the common representation became important as they needed to work together. My biggest challenge was deciding what belonged in the widget data type, component tree, and query plan, and how to separate the saved design from financial data. I explored alternatives, examined the existing code, and discussed the proposed structure with the team. Agreeing on these boundaries earlier would have made the initial development more straightforward.
+- **Learning the stack alongside implementation:** Before this iteration, I had not formally learned TypeScript, JavaScript, or Go. I often needed to understand unfamiliar language features and existing code before making changes. This added effort, particularly when tracing how frontend state, backend responses, and rendering connected. Working through the existing implementation gradually helped me understand those relationships.
 
 
 #### Q3(a). Planned changes
 
-List any **process-related** (i.e. team organization and/or how you work) changes you are planning to make (if there are any)
+**Yucheng (Ethan) — US-03**
 
- * Ordered from most to least important, with supporting argument explaining a change.
+For the next iteration, I would like to:
+
+- Agree on shared data structures and interfaces before dependent features develop too far, and document a small example that everyone can use. Keep implementation choices flexible within those boundaries.
+- Continue checking the overall user experience with Ralph while making technical decisions through investigation and team discussion. His feedback helped clarify how the feature should fit into the product.
+- Take on work beyond US-03 to understand more of the application and contribute more flexibly to the team.
 
 #### Q3(b). Integration & Next steps
-Briefly explain how you integrated the previously developed individuals components as one product (i.e. How did you split the work across your team) and how was the work integrated together.
 
- * Keep this very short (1-3 lines).
+**Yucheng (Ethan) — US-03**
 
+I completed my US-03 implementation and technical documentation. For the demo, a teammate combined the relevant branches into an integration branch because some pull requests were still awaiting approval or merge. My proposed next step is to verify a continuous generation, saving, reopening, and refresh journey as the work is merged.
 
 ## Product - Review
 
 #### Q4. How was your product demo?
- * How did you prepare your demo?
- * What did you manage to demo to your partner?
- * Did your partner accept the features? And were there change requests?
- * What were your learnings through this process? This can be either from a process and/or product perspective.
- * *This section will be marked very leniently so keep it brief and just make sure the points are addressed*
+
+**Yucheng (Ethan) — US-03**
+
+The team demonstrated the combined branch in a simulator, including my saved-widget functionality alongside teammates' features. We showed the different parts working together. My impression was that Ralph was satisfied about our progress.
+
+Across the iteration, I communicated with Ralph approximately four or five times through Slack and online discussions. His feedback focused on bringing widget types together and making management consistent with the existing app. Specific requests included using Customize Widgets as the entry point, reusing the search and filter row, removing the manual refresh button, using eye icons, simplifying menus, and adding Savi or creator badges. I revised existing code in response while retaining automatic refresh and error recovery. These discussions taught me to consider how a feature fits the product, alongside its technical correctness.
+
+**Supporting work:** [US-03 implementation and review — PR #6586](https://github.com/cheapreats/ce/pull/6586).
