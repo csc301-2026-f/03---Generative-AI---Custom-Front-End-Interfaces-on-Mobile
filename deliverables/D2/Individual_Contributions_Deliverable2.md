@@ -1,9 +1,11 @@
 ## Ziheng (Jerry) Wang
+
 **Role:** Owned US-07 (Remove a widget) end to end, from the UI interaction to the removal logic.
 
 **Contributions:**
 - Implemented widget removal across both the library and the dashboard: removed widgets can no longer be opened, edited or exported, while imported copies are kept and no data is permanently erased ([PR #6602]).
 - - Built the removal interaction: a ⋯ menu on the widget's top-right corner, with confirmation, cancellation with no side effects, and undo ([PR #6602]). Currently reworking it into drag-to-remove for a faster flow (in progress, not part of the D2 release).
+
 ## Yifei Yang
 
 **Role:** Owned US-01 (Generate a supported financial view) end to end, from natural-language request interpretation to backend-backed widget generation and mobile integration.
@@ -20,21 +22,16 @@
 
 ## Kaiwen Yang
 
-**Role:** Implemented the US-01 AI-generated spending widget flow across the mobile app and backend, with a focus on Ask Savi integration, scope confirmation, previews, and adding generated widgets to Home.
-
-I built the initial monthly-expense generation flow and connected it to Savi's chat and mobile interface, working with teammates on the shared widget contracts and subsequent integration.
+**Role:** Implemented the US-01 AI-generated spending widget flow across the mobile app and backend, with a focus on Ask Savi integration.
 
 **Contributions:**
 
-- **Building the initial generation flow:** Implemented the mobile widget creation screen, request parsing and service layer, and `generateSupportedWidgetView` backend RPC. Connected natural-language requests to account/month scope selection, expense aggregation, and structured responses that the mobile app can render.
-- **Confirming scope and protecting financial data:** Added request validation and explicit scope confirmation before generating a financial view. Used backend transaction aggregation for expense amounts and kept model interpretation separate from financial calculations, while using the existing account authorization flow.
-- **Integrating creation into Ask Savi:** Added the `prepare_spending_widget` chat tool and an interactive widget card that opens the creation flow from a conversation. Preserved the user's original prompt across the chat-to-widget handoff so the requested view and presentation context are retained.
+- **Building the initial generation flow:** Implemented the mobile widget creation screen, request parsing and service layer, and backend RPC. Connected natural-language requests to account/month scope selection, expense aggregation, and structured responses that the mobile app can render.
+- **Integrating creation into Ask Savi:** Added the chat tool and an interactive widget card that opens the creation flow from a conversation. Preserved the user's original prompt across the chat-to-widget handoff so the requested view and presentation context are retained.
 - **Developing the chat and creation interface:** Updated the Ask Savi header, prompt suggestions, composer, history, and New Chat controls, and connected the account/month confirmation flow to widget generation. Fixed navigation from My Widgets so users can reach the intended creation entry point.
-- **Rendering widget previews:** Built bar and donut spending previews with category labels, account/month context, currency-specific totals, and an empty-data state. Added composition rendering and validation for supported presentation settings so generated layouts can be displayed through native mobile components.
 - **Adding generated widgets to Home:** Implemented device-local, profile-scoped storage and Home rendering for confirmed widget snapshots. Added duplicate detection, a saved-widget limit, serialized storage updates, and clearing of local widget data on sign-out.
 - **Connecting model requests and native drafts:** Updated the shared OpenRouter request handling and widget intent transport, fixed model-request routing, and added backend and mobile-service support for native widget draft responses. Kept the generated presentation connected to the validated financial scope.
 - **Testing and debugging the workflow:** Added mobile screen, chat-card, preview, and service tests; backend handler, validation, model-transport, and RPC-registration tests; and hermetic coverage for widget generation and chat integration. Added regression tests for prompt preservation and request-routing fixes.
-- **Documenting and integrating the work:** Documented the widget request/response contract and chat-tool handoff, resolved conflicts while integrating upstream changes, and fixed local presubmit and Semgrep worktree issues to support validation before review.
 
 **Evidence:** [PR #6593](https://github.com/cheapreats/ce/pull/6593).
 
