@@ -39,8 +39,6 @@
 
 **Role:** Owned US-03 and designed the shared widget architecture, helping the team agree on structures and interfaces for related features.
 
-I built on the existing AI Widgets work and Savi components, combining implementation of saved-widget reuse with architecture design and team coordination.
-
 **Contributions:**
 
 - **Designing the widget architecture:** Defined the shared widget data types and how native component trees, query plans, and financial-data snapshots work together. Separated the saved design from changing values so refresh does not require AI regeneration. Organized rendering through a reusable component registry with matching frontend and backend validation.
