@@ -27,6 +27,7 @@
 **Contributions:**
 
 - **Building the initial generation flow:** Implemented the mobile widget creation screen, request parsing and service layer, and backend RPC. Connected natural-language requests to account/month scope selection, expense aggregation, and structured responses that the mobile app can render.
+- **Confirming scope and protecting financial data:** Added request validation and explicit scope confirmation before generating a financial view. Used backend transaction aggregation for expense amounts and kept model interpretation separate from financial calculations, while using the existing account authorization flow.
 - **Integrating creation into Ask Savi:** Added the chat tool and an interactive widget card that opens the creation flow from a conversation. Preserved the user's original prompt across the chat-to-widget handoff so the requested view and presentation context are retained.
 - **Developing the chat and creation interface:** Updated the Ask Savi header, prompt suggestions, composer, history, and New Chat controls, and connected the account/month confirmation flow to widget generation. Fixed navigation from My Widgets so users can reach the intended creation entry point.
 - **Adding generated widgets to Home:** Implemented device-local, profile-scoped storage and Home rendering for confirmed widget snapshots. Added duplicate detection, a saved-widget limit, serialized storage updates, and clearing of local widget data on sign-out.
