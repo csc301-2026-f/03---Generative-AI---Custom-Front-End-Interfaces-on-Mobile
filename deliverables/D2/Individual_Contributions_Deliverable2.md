@@ -3,7 +3,11 @@
 
 **Contributions:**
 - Implemented widget removal across both the library and the dashboard: removed widgets can no longer be opened, edited or exported, while imported copies are kept and no data is permanently erased ([PR #6602]).
-- - Built the removal interaction: a ⋯ menu on the widget's top-right corner, with confirmation, cancellation with no side effects, and undo ([PR #6602]). Currently reworking it into drag-to-remove for a faster flow (in progress, not part of the D2 release).
+- Built the removal interaction: a ⋯ menu on the widget's top-right corner, with confirmation, cancellation with no side effects, and undo ([PR #6602]). Currently reworking it into drag-to-remove for a faster flow (in progress, not part of the D2 release but has been updated in the pr desciption).
+
+**Evidence:** [PR #6602](https://github.com/cheapreats/ce/pull/6602).
+[PR #6739](https://github.com/cheapreats/ce/pull/6739)
+
 ## Yifei Yang
 
 **Role:** Owned US-01 (Generate a supported financial view) end to end, from natural-language request interpretation to backend-backed widget generation and mobile integration.
