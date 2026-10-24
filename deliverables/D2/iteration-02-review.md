@@ -25,6 +25,7 @@
 - Integrate dependent features and run end-to-end tests throughout the iteration, merging dependencies in order so issues surface earlier.
 - Keep local development environments ready and validate CI and PR requirements before submission to reduce avoidable delays.
 - Conduct earlier UI walkthroughs to identify usability issues and improve feedback after user actions.
+- Follow Ralph's suggestion, rework widget removal into an iOS-style edit mode 
 
 #### Q3(b). Integration & Next steps
 
