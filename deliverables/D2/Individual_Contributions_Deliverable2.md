@@ -52,15 +52,15 @@
 
 **Evidence:** [PR #6586](https://github.com/cheapreats/ce/pull/6586) and [US-03 documentation](https://github.com/cheapreats/ce/tree/fcf6f277ca8e46b70e556ecdf5ec0a4777d7229d/docs/ai-widgets/US-03).
 
-## US-02
+## Yiting(Tina) Gao
 
-**Name:**
-
-**Role:** Implemented US-02 (Choose a design), covering preview comparison and saving the selected widget design.
+**Role:** Implemented US-02 (Choose from 3 design views), covering preview comparison and saving the selected widget design.
 
 **Contributions:**
 
-- Built the design-selection interface for comparing alternative native previews of the requested financial view.
-- Connected design selection to the save flow so users can save their preferred widget design.
+- Implemented US‑02’s Bar, Line, and Donut previews inside Ask Savi using the existing renderer.
+- Built two backend endpoints for monthly-expense previews and private widget saving in MongoDB, with duplicate-save protection and initial dashboard placement.
+- Added regression tests for cancellation, retries, profile isolation, persistence, and authorization. 
+- Validated the integration with 127 focused mobile tests and 360 backend integration tests.
 
 **Evidence:** [PR #6598](https://github.com/cheapreats/ce/pull/6598).
