@@ -64,3 +64,19 @@
 - Validated the integration with 127 focused mobile tests and 360 backend integration tests.
 
 **Evidence:** [PR #6598](https://github.com/cheapreats/ce/pull/6598).
+
+## Junhua Zhou
+
+**Role:** Owned US-05 (Refine a widget) and US-06 (Undo widget changes), covering the refinement interface, AI integration, previews, and saved-version recovery.
+
+**Contributions:**
+
+- **Building the refinement interface:** Connected saved widgets to a dedicated editor where users can view their widget and request changes through a chatbox below it. Also added an Ask Savi entry point for opening widget refinement.
+- **Integrating AI-powered refinement:** Reused the shared AI infrastructure to submit the existing widget definition and the user's requested changes, validate the returned JSON, and display a preview before applying it. Preserved the widget's confirmed financial scope while allowing supported presentation changes.
+- **Previewing changes before saving:** Implemented current-versus-preview comparison, with Apply and Discard controls so users can review proposed changes before updating their saved widget.
+- **Implementing undo and redo:** Added bounded version history for accepted refinements, allowing users to restore an earlier saved design and redo changes without asking the AI to regenerate it.
+- **Protecting saved changes:** Added ownership checks, revision checks, and safeguards against duplicate submissions or outdated responses overwriting newer widget changes.
+- **Testing and integration:** Added mobile, backend, and hermetic integration coverage for refinement and undo flows. Tested the interface in the iOS simulator, debugged the shared generation workflow.
+- **Preparing the integrated demo:** Brought the team's userstory together into a working demo and recorded a demo video.
+
+**Evidence:** [PR #6736](https://github.com/cheapreats/ce/pull/6736).
