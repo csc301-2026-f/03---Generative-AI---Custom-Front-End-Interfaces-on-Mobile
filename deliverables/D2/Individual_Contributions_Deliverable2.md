@@ -2,8 +2,10 @@
 **Role:** Owned US-07 (Remove a widget) end to end, from the UI interaction to the removal logic.
 
 **Contributions:**
-- Implemented widget removal across both the library and the dashboard: removed widgets can no longer be opened, edited or exported, while imported copies are kept and no data is permanently erased ([PR #6602]).
-- Built the removal interaction: a ⋯ menu on the widget's top-right corner, with confirmation, cancellation with no side effects, and undo ([PR #6602]). Currently reworking it into drag-to-remove for a faster flow (in progress, not part of the D2 release but has been updated in the pr desciption).
+- Implemented widget removal on the mobile frontend, based on `main` ([PR #6602](https://github.com/cheapreats/ce/pull/6602)): a ⋯ menu on the widget's top-right corner with confirmation, cancellation with no side effects, and undo; removed widgets disappear from both the library and the dashboard. Merges into `main` with no conflicts and passes all tests. The D2 version (⋯ menu) is shown in the PR description's edit history, as the second last version is the demo version; later commits add the in-progress iOS-style edit mode.
+- Extended removal to AI-generated widgets ([PR #6739](https://github.com/cheapreats/ce/pull/6739)), built on Ethan's widget component tree ([PR #6586](https://github.com/cheapreats/ce/pull/6586)). It will merge into `main` without conflicts once PR #6586 lands, so it is not part of the D2 release.
+- Currently reworking the removal interaction into an iOS-style edit mode (long press, "−" badge, Undo toast) on the same PR (in progress, not part of the D2 release).
+- Manually tested all D2 user stories (US-01, US-07, US-xx) end to end before the partner demo, checking each flow against its acceptance criteria in groupchat.
 
 **Evidence:** [PR #6602](https://github.com/cheapreats/ce/pull/6602).
 [PR #6739](https://github.com/cheapreats/ce/pull/6739)
