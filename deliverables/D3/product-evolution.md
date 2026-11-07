@@ -316,6 +316,8 @@ On Overview, removing a widget meant opening that card’s menu and tapping Remo
 
 The shared Add button also kept widening until it covered the bottom of the screen.
 
+<img src="images/Add_before.png" width="260" alt="Before: the shared Add button kept widening until it filled the bottom of the screen">
+
 Widget discovery was limited.
 
 Design selection, private saving, and dashboard placement were not yet fully integrated.
@@ -335,6 +337,8 @@ The Overview experience is now much more direct.
 Removing n widgets now takes one long press and n taps, instead of 2n taps through each card’s menu, and the remove option is visible on every card instead of hidden in a menu, and the same long press also begins drag-and-drop, so removing and reordering widgets now start from one interaction rather than requiring separate workflows.
 
 The Add button now keeps a stable width.
+
+<img src="images/Add_after.png" width="260" alt="After: the Add button stays the width of its label">
 
 The widget library now offers stronger discovery and visibility controls, including search, widget type, creation date, update date, show/hide controls, and creator information.
 
