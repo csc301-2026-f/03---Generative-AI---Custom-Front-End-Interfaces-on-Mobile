@@ -45,8 +45,33 @@ Evidence: https://github.com/cheapreats/ce/pull/6593
 
 **Evidence:** [PR #6586](https://github.com/cheapreats/ce/pull/6586)
 
-**[Name]**, [Role]
-> [Specific contributions]
+## Yiting(Tina) Gao
+**Role:** 
+Refine US-02 (print widget previews in chatbox), including CI fixes, regression testing; Phase 2 custom-logic design.
+
+**Contributions:**
+- Fixed the widget pinning TypeScript error by explicitly typing the updated state as `UIState`.
+- Added Go tests verifying that widget save fields survive database serialization and internal save metadata is excluded from JSON responses.
+- Expanded RPC tests to verify widget endpoint registration and rejection of unauthenticated requests.
+- Drafted the Phase 2 proposal for converting natural-language financial calculations into structured, validated calculation plans.
+- Defined the proposed architecture: cloud services handle authorization, data retrieval, and definition storage; the device executes validated calculations and passes results to the renderer.
+- Specified proposed security controls, including restricted operations, authorized data inputs, and execution limits to reduce unauthorized access and resource abuse.
+
+**Evidence:** [PR #6598](https://github.com/cheapreats/ce/pull/6598).
+
+## Junhua Zhou
+
+**Role:** Built AI-generated app themes in Ask Savi, extending D2's widget refinement (US-05/US-06) to the whole app.
+
+**Contributions:**
+
+- **Theme agent:** Added an Ask Savi agent that turns a description ("a calm deep ocean at night") into a full app theme (colours, corner roundness, text size), shown as a preview card. Built on the Light/Dark options from [PR #6284](https://github.com/cheapreats/ce/pull/6284).
+- **Validation:** Matching TypeScript and Go validators enforce WCAG AA contrast and keep Savi's gold accent. Invalid AI output goes back to the model, never to the user.
+- **Try, Keep, Undo:** Try it previews the theme across the app without saving it; Keep saves it, with Revert and Undo.
+- **Storage and rollout:** Added `getAppTheme`/`saveAppTheme` RPCs with revision checks. The feature sits behind the `app_theme_generation` flag, and older app versions never get a card they can't draw.
+- **Testing:** Added Jest, Go and hermetic tests for the agent, validation, saves and chat card. Verified the flow end to end in the iOS simulator with a real OpenRouter model.
+
+**Evidence:** [PR #7727](https://github.com/cheapreats/ce/pull/7727) (four commits: theme foundation, account storage, Ask Savi theme agent, chat card and Settings). D2: [PR #6736](https://github.com/cheapreats/ce/pull/6736).
 
 **[Name]**, [Role]
 > [Specific contributions]
