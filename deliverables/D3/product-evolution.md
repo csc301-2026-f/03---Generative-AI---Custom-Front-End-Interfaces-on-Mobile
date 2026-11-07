@@ -10,7 +10,7 @@
 
 After D2, our team identified several limitations in the existing widget experience and AI-generated financial workflow.
 
-The first issue was the **Overview editing experience**. The Overview screen showed a stack of widgets, but changing that stack was slow and indirect. Removing a widget required leaving the card, navigating through an additional menu, and applying the change. There was also no quick way to undo an accidental removal. Since Overview is intended to show each user the widgets most relevant to them, editing that layout needed to be more direct. We also identified an unstable Add button on the Overview screen. These issues were specifically highlighted in partner feedback after D2.
+The first issue was the **Overview editing experience**. The Overview screen showed a stack of widgets, but changing that stack was slow and indirect. Removing a widget required leaving the card, navigating through an additional menu, and applying the change. Since Overview is intended to show each user the widgets most relevant to them, editing that layout needed to be more direct. We also found a layout bug in the shared Add button on the Transactions and Wallet screens: on Android, it kept widening until it covered the bottom of the screen. These issues were specifically highlighted in partner feedback after D2 and the preparations of the next phase.
 
 The second issue was **widget management and completion of the widget creation workflow**. Users needed better ways to find saved widgets, manage their visibility, compare generated designs, save a selected widget safely, and place it on the dashboard. Retry, cancellation, and partial-failure behaviour also needed to be more reliable.
 
@@ -52,7 +52,7 @@ The same long press that begins edit mode can also lift the widget for drag-and-
 
 Hidden widgets can still be restored through **Customize widgets**, preserving the existing workflow.
 
-We also fixed the unstable Add button by constraining the bar on its left side so that the control behaves consistently.
+We also fixed the Add button that Add transaction (Transactions) and Add Account (Wallet) share. It measured its own container, so its width grew on every layout pass; it now measures the label with a hidden, absolutely positioned copy.
 
 #### Design Decision
 
@@ -253,7 +253,7 @@ D3 increased our focus on testing not only successful user flows but also edge c
 
 For Overview edit mode, tests cover:
 
-#### `useWidgetEditMode.spec.ts`
+#### `useWidgetEditMode.spec.ts` (new)
 
 - starting edit mode;
 - stopping edit mode;
@@ -263,10 +263,18 @@ For Overview edit mode, tests cover:
 #### `WidgetRenderer.spec.tsx`
 
 - starting edit mode when a long press lifts a widget;
-- showing the drag grip only during edit mode;
-- displaying the remove badge on hideable widgets while editing;
-- hiding the remove badge outside edit mode;
-- preventing removal controls on widgets that cannot be hidden.
+- showing the drag grip only in edit mode;
+- showing a remove badge on each hideable widget while editing;
+- showing no remove badge outside edit mode, or on a widget that cannot be hidden.
+
+#### `useWidgetDragAndDrop.spec.ts`
+
+- calling `onLongPress` when a long press lifts an item.
+
+#### `uiStateManager.spec.ts`
+
+- hiding a widget in place and persisting it;
+- showing a hidden widget back in its original slot after the other widgets were reordered.
 
 For the wider widget workflow, regression tests also cover:
 
@@ -278,27 +286,6 @@ For the wider widget workflow, regression tests also cover:
 - account authorization;
 - financial-calculation correctness.
 
-For the Overview-related work, the relevant local suites passed:
-
-- **11 suites**
-- **97 tests**
-
-Additional local checks reported:
-
-- `npm run lint`: **0 errors**
-- Prettier: **clean**
-
-The Android emulator was used to manually verify:
-
-- entering edit mode;
-- removing a widget;
-- Undo;
-- all supported ways of exiting edit mode;
-- ignored widget taps during editing;
-- drag-to-reorder;
-- restoring a hidden widget through Customize widgets.
-
-Because iOS hardware and macOS were not available for that implementation, iOS behaviour remains unverified.
 
 Accessibility work also included:
 
@@ -340,7 +327,6 @@ Rather than allowing AI to generate unrestricted interfaces, we are moving towar
 - **PR #6586** – Widget-management improvements
 - **PR #6593** – AI widget creation and Ask Savi integration
 - **PR #6602** – Overview edit mode and direct widget removal
-- **PR #6603** – Upstream fixture repair used during integration
 
 ---
 
@@ -368,7 +354,7 @@ However, several parts of the surrounding product experience remained incomplete
 
 On Overview, removing a widget was indirect. A user had to leave the screen they were actively editing, navigate through another menu, apply the change, and repeat the process if the removal was accidental.
 
-The Add button was also unstable.
+The shared Add button also kept widening until it covered the bottom of the screen.
 
 Widget discovery was limited.
 
@@ -406,7 +392,7 @@ within four seconds.
 
 The same long press also begins drag-and-drop, so removing and reordering widgets now start from one interaction rather than requiring separate workflows.
 
-The unstable Add button has also been fixed.
+The Add button now keeps a stable width.
 
 The widget library now offers stronger discovery and visibility controls, including search, widget type, creation date, update date, show/hide controls, and creator information.
 
@@ -498,8 +484,6 @@ The failure caused by the Finance Wrapped fixture changes is one example. Instea
 The interaction between editing and drag-and-drop also required more design work than expected because one gesture needed to support both behaviours without allowing accidental removal.
 
 Partial failure in the save-and-place workflow was another challenge. Backend saving and local dashboard placement can succeed or fail independently, so recovery needed to be designed without creating duplicate state.
-
-Finally, mobile-platform verification remains an issue. Android behaviour has been tested, but some iOS and screen-reader behaviour still requires verification.
 
 ---
 
