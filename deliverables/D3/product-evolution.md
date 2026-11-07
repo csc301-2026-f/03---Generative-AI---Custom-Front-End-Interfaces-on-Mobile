@@ -126,4 +126,414 @@ previews inside the authenticated Ask Savi workflow.
 
 Bar and Donut views display category spending, while Line displays daily spending for the same account and month.
 
-Validation checks that the financial totals represented
+Validation checks that the financial totals represented across the views remain consistent before allowing the user to compare them.
+
+We implemented the:
+
+```text id="y5b75h"
+previewMonthlyExpenseWidget
+saveWidgetDesign
+```
+
+endpoints and connected the selection interface to the existing widget renderer.
+
+The backend verifies account permissions before saving and stores only the selected widget definition in MongoDB.
+
+Dashboard placement remains profile-specific and is stored separately on the device.
+
+We also added stronger behaviour around cancellation and retries:
+
+- cancelling before saving creates no widget;
+- stable request identifiers prevent duplicate widgets;
+- repeated saves are handled safely;
+- if cloud saving succeeds but dashboard placement fails, placement can be retried without saving the widget again.
+
+This was important because backend persistence and dashboard placement are separate operations and can fail independently.
+
+---
+
+### 2.4 Custom Financial Calculation Prototype
+
+Another area of D3 explored how we could move beyond the fixed financial views supported in D2.
+
+We developed a backend prototype that separates **AI interpretation** from **financial execution**.
+
+The OpenRouter planner interprets a user's natural-language request and proposes a structured formula.
+
+After the user confirms the relevant:
+
+- account;
+- month;
+- time zone;
+- currency;
+
+the API validates the formula, verifies account access, retrieves eligible financial transactions, and performs the calculation.
+
+For example, instead of requiring a user to calculate a savings rate manually, the system can calculate both monthly net savings and savings rate.
+
+Using seeded transactions in local MongoDB, the prototype verified:
+
+- **CAD 1,800 net savings**
+- **36% savings rate**
+
+An integration test also verified that the API rejects attempts to perform the calculation using another user's account.
+
+A key design decision is that the model does **not** generate financial values directly.
+
+The model helps interpret what the user is requesting, while actual financial values come from authorized backend data and are processed through controlled application logic.
+
+The architecture therefore follows:
+
+```text id="jrylad"
+Natural-language request
+        ↓
+AI interpretation
+        ↓
+Structured financial operation
+        ↓
+Validation
+        ↓
+Authorization
+        ↓
+Authorized financial data
+        ↓
+Controlled calculation
+        ↓
+Existing widget renderer
+```
+
+This makes the system more flexible without giving the language model unrestricted control over financial calculations.
+
+---
+
+### 2.5 Integration Challenges
+
+Integration was one of the most significant engineering challenges during D3.
+
+Our changes interact with several existing parts of Savi:
+
+- Overview;
+- Ask Savi;
+- widget state;
+- drag-and-drop;
+- local UI state;
+- backend financial data;
+- MongoDB persistence;
+- the widget renderer;
+- dashboard placement;
+- accessibility;
+- error handling.
+
+One challenge was that the same long press on an Overview widget now has two responsibilities: starting edit mode and beginning drag-and-drop.
+
+Instead of choosing one behaviour, we allow the same long press to do both. Removal remains a separate tap on the `−` badge. This ensures that dragging a card can never accidentally remove it.
+
+Another challenge came from upstream changes in Savi's main branch.
+
+For example, **PR #6075 (Finance Wrapped)** changed test fixtures and caused failures in `HomeScreen.spec.tsx` and `InsightsScreen.spec.tsx` unrelated to our work.
+
+Instead of ignoring or skipping these tests, we built on top of the fix from **PR #6603**, which repaired the affected fixtures.
+
+We also needed to reconcile:
+
+- widget-state differences;
+- accessibility changes;
+- tag-colour updates;
+- existing error-handling behaviour;
+- undefined invoice error helpers;
+- differences between cloud-saved widget state and device-local dashboard state.
+
+Because the partner repository receives frequent changes, our feature branches can quickly fall behind main. This resulted in additional merge conflicts, CI failures caused by unrelated changes, and integration work.
+
+---
+
+### 2.6 Testing, Reliability, and Accessibility
+
+D3 increased our focus on testing not only successful user flows but also edge cases and recovery behaviour.
+
+For Overview edit mode, tests cover:
+
+#### `useWidgetEditMode.spec.ts`
+
+- starting edit mode;
+- stopping edit mode;
+- handling Android Back only while editing;
+- stopping editing when Overview loses focus.
+
+#### `WidgetRenderer.spec.tsx`
+
+- starting edit mode when a long press lifts a widget;
+- showing the drag grip only during edit mode;
+- displaying the remove badge on hideable widgets while editing;
+- hiding the remove badge outside edit mode;
+- preventing removal controls on widgets that cannot be hidden.
+
+For the wider widget workflow, regression tests also cover:
+
+- cancellation before saving;
+- repeated saves;
+- uncertain save outcomes;
+- interrupted dashboard placement;
+- profile changes;
+- account authorization;
+- financial-calculation correctness.
+
+For the Overview-related work, the relevant local suites passed:
+
+- **11 suites**
+- **97 tests**
+
+Additional local checks reported:
+
+- `npm run lint`: **0 errors**
+- Prettier: **clean**
+
+The Android emulator was used to manually verify:
+
+- entering edit mode;
+- removing a widget;
+- Undo;
+- all supported ways of exiting edit mode;
+- ignored widget taps during editing;
+- drag-to-reorder;
+- restoring a hidden widget through Customize widgets.
+
+Because iOS hardware and macOS were not available for that implementation, iOS behaviour remains unverified.
+
+Accessibility work also included:
+
+- accessibility labels;
+- selection states;
+- save-status announcements.
+
+Manual VoiceOver/TalkBack verification still remains before D4.
+
+CI evidence is also still being finalized. A previously recorded failure was addressed and the fix was pushed, but we will only describe the pipeline as confirmed passing once a fresh CI run provides that evidence.
+
+---
+
+### 2.7 Future AI Interface Direction
+
+In parallel with the implemented D3 work, we refined the longer-term direction of AI-powered financial interfaces.
+
+One direction under consideration is an interactive transaction explorer that could allow users to request different filtering or grouping structures for transaction data.
+
+For example, the user could ask the system to organize recent transactions by different levels depending on the financial question being asked.
+
+This remains a **design proposal**, not a completed D3 feature.
+
+The important outcome of this exploration was that our direction became more specific.
+
+Rather than allowing AI to generate unrestricted interfaces, we are moving toward structured financial interactions where AI interprets intent while application logic controls:
+
+- available filters;
+- grouping behaviour;
+- calculations;
+- permissions;
+- data access;
+- rendering.
+
+---
+
+### Relevant Pull Requests
+
+- **PR #6586** – Widget-management improvements
+- **PR #6593** – AI widget creation and Ask Savi integration
+- **PR #6602** – Overview edit mode and direct widget removal
+- **PR #6603** – Upstream fixture repair used during integration
+
+---
+
+## 3. Before vs. After
+
+### Before D3
+
+At the end of D2, the basic AI widget concept worked.
+
+A typical financial-widget workflow was:
+
+```text id="trb8rh"
+User request
+    ↓
+Match a supported view
+    ↓
+Confirm account and month
+    ↓
+Retrieve authorized data
+    ↓
+Generate widget
+```
+
+However, several parts of the surrounding product experience remained incomplete.
+
+On Overview, removing a widget was indirect. A user had to leave the screen they were actively editing, navigate through another menu, apply the change, and repeat the process if the removal was accidental.
+
+The Add button was also unstable.
+
+Widget discovery was limited.
+
+Design selection, private saving, and dashboard placement were not yet fully integrated.
+
+Retry and partial-failure behaviour needed improvement.
+
+The AI workflow also remained constrained by predefined financial views.
+
+---
+
+### After D3
+
+The Overview experience is now much more direct.
+
+A user can:
+
+```text id="9kfzj3"
+Long press
+→ enter edit mode
+→ tap −
+→ widget disappears
+```
+
+without leaving Overview.
+
+If the removal was accidental:
+
+```text id="cvp6am"
+Undo
+→ widget returns to the same position
+```
+
+within four seconds.
+
+The same long press also begins drag-and-drop, so removing and reordering widgets now start from one interaction rather than requiring separate workflows.
+
+The unstable Add button has also been fixed.
+
+The widget library now offers stronger discovery and visibility controls, including search, widget type, creation date, update date, show/hide controls, and creator information.
+
+The widget-generation workflow has also become more complete.
+
+Users can move from a confirmed request to:
+
+```text id="fshcjh"
+Confirmed request
+→ compare chart designs
+→ select one
+→ save privately
+→ place on dashboard
+```
+
+with duplicate-save protection, cancellation handling, and recovery from partial placement failures.
+
+The custom financial-calculation prototype also demonstrates how the system can move beyond fixed financial views.
+
+Instead of relying only on:
+
+```text id="9xtww9"
+Request
+→ predefined view
+→ widget
+```
+
+the architecture can increasingly support:
+
+```text id="icqun3"
+User request
+→ interpretation
+→ structured operation
+→ validation
+→ authorization
+→ financial data
+→ controlled execution
+→ existing widget workflow
+```
+
+The improvement from D2 to D3 is therefore both **user-facing and architectural**.
+
+From the user's perspective, widget editing, discovery, saving, and recovery are more direct.
+
+From the engineering perspective, the widget system is increasingly based on reusable state, shared rendering infrastructure, validation, and controlled financial execution rather than independent hard-coded flows.
+
+---
+
+## 4. Reflection
+
+### What Worked Well
+
+Reusing existing state and infrastructure worked particularly well.
+
+For Overview edit mode, using the existing `isVisible` state avoided introducing another persistence mechanism. This meant we needed:
+
+- no backend change;
+- no migration;
+- no duplicate widget-visibility state.
+
+Customize widgets, Undo, and direct Overview editing can all operate on the same value.
+
+Similarly, reusing the existing renderer for generated-widget previews and saved widgets reduced duplication and kept different parts of the product visually consistent.
+
+Keeping edit-mode behaviour inside `useWidgetEditMode` also improved testability and reduced the amount of state-management logic inside larger screen components.
+
+Another successful decision was separating AI interpretation from financial execution. This gives the system more flexibility while keeping account permissions, financial values, and calculations under application control.
+
+Testing isolated behaviours before complete integration also helped us identify errors more precisely.
+
+---
+
+### What Was Harder Than Expected
+
+Integration was harder than expected.
+
+Savi's main repository changes frequently, sometimes with more than ten pull requests being merged in a day. As a result, a branch that worked correctly could quickly fall behind main.
+
+This created:
+
+- merge conflicts;
+- unrelated test failures;
+- CI failures;
+- fixture incompatibilities;
+- additional rebasing and coordination.
+
+The failure caused by the Finance Wrapped fixture changes is one example. Instead of disabling the affected tests, we integrated the corresponding upstream test repair.
+
+The interaction between editing and drag-and-drop also required more design work than expected because one gesture needed to support both behaviours without allowing accidental removal.
+
+Partial failure in the save-and-place workflow was another challenge. Backend saving and local dashboard placement can succeed or fail independently, so recovery needed to be designed without creating duplicate state.
+
+Finally, mobile-platform verification remains an issue. Android behaviour has been tested, but some iOS and screen-reader behaviour still requires verification.
+
+---
+
+### Effect on the Path to D4
+
+D3 gave us a clearer direction for D4.
+
+Our team plans to split into smaller groups to work on the next phase of custom interfaces, including the **Transactions** and **Wallet** areas.
+
+Several pieces of D3 work can be reused directly.
+
+For example, Wallet section reordering and visibility can reuse the same edit-mode and visibility-state pattern introduced for Overview.
+
+We also learned an important process lesson from D3: large dependency chains between unmerged pull requests slow integration and make CI harder to interpret.
+
+For D4, we plan to:
+
+- keep PRs smaller;
+- base new work more closely on main;
+- reduce dependencies between unmerged branches;
+- merge related work in a clearer order;
+- obtain fresh CI evidence earlier;
+- complete accessibility verification;
+- verify behaviour on additional platforms where possible;
+- improve end-to-end testing;
+- resolve remaining integration issues;
+- continue connecting flexible financial interactions to the existing Savi workflow.
+
+For the AI side of the project, D4 will also require us to make the boundary between AI interpretation and application-controlled behaviour explicit.
+
+We need to determine which filtering, grouping, and calculation operations are supported and make sure those operations remain predictable and testable.
+
+Overall, D3 moved the project from a working prototype toward a more mature product.
+
+The user-facing workflow is more direct, the underlying widget state is more reusable, error and retry behaviour is more deliberate, and the AI-interface direction is more constrained and technically realistic.
+
+The remaining D4 work is therefore focused less on proving that the concept works and more on making the complete system stable, testable, accessible, and ready for final integration.
