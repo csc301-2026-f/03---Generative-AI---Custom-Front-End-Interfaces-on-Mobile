@@ -50,9 +50,9 @@ Removal reuses the existing `isVisible: false` flag (`uiStateManager.setWidgetVi
 
 We also improved the broader widget-management experience.
 
-The work in [PR #6586](https://github.com/cheapreats/ce/pull/6586) adds show/hide controls and creator badges, making widget state and origin clearer to the user.
+In [PR #6586](https://github.com/cheapreats/ce/pull/6586), we brought built-in, local, and saved native widgets into one library. We reused the existing show/hide controls and added Savi and creator badges where attribution is available.
 
-Reset behaviour was also improved. Resetting built-in widgets preserves custom widgets and their pinned state instead of resetting the user's entire configuration.
+We also changed Reset to restore built-in defaults while preserving custom widgets and their pinned state.
 
 To improve discovery, we added **Created** and **Last Updated** filters that can be combined with existing search and widget-type filters.
 
@@ -364,7 +364,17 @@ The Add button now keeps a stable width.
 
 <img src="images/Add_after.png" width="260" alt="After: the Add button stays the width of its label">
 
-The widget library now offers stronger discovery and visibility controls, including search, widget type, creation date, update date, show/hide controls, and creator information.
+**Widget management.** With [PR #6586](https://github.com/cheapreats/ce/pull/6586),
+
+| Before: Manage widgets sheet | After: unified widget library |
+| --- | --- |
+| <img src="images/widgets-library-before.png" width="260" alt="BEFORE: Manage widgets sheet with built-in rows, ordering arrows and existing eye controls"> | <img src="images/widgets-library-after.png" width="260" alt="AFTER: shared library with built-in widgets, Savi badges and a saved widget with creator initials and a visibility control"> |
+
+**Date filtering.** Created and Last Updated filters work alongside search and widget type. In the D3 interaction below, choosing **7 days** fills in the date range before the user selects **Apply dates**. Custom calendar selection supports more specific ranges.
+
+| D3: no date range selected | D3: seven-day preset selected |
+| --- | --- |
+| <img src="images/widgets-created-initial.png" width="260" alt="D3 initial state: Created filter with Any time selected and both date boundaries empty"> | <img src="images/widgets-created-selected.png" width="260" alt="D3 selected state: Created filter with the seven-day preset, populated date boundaries and Apply dates visible"> |
 
 The widget-generation workflow has also become more complete.
 
