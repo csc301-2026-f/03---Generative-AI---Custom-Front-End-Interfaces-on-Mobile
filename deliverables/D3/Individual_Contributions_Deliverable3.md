@@ -31,6 +31,20 @@ Evidence: https://github.com/cheapreats/ce/pull/6593
 
 **Evidence:** [PR #6593](https://github.com/cheapreats/ce/pull/6593)
 
+## Yucheng Duan (Ethan)
+
+**Role:** Continued developing US-03 (Reopen and refresh saved widgets), focusing on widget-library usability, saved-widget state, and integration with the existing Savi mobile app.
+
+**Contributions:**
+
+- **Refined the unified widget library:** Continued integrating built-in, local, and saved native widgets through the existing Customize widgets entry. Improved search and type filtering, compact previews, creator badges, and show/hide controls connected to Overview.
+- **Added date-based discovery:** Implemented combinable Created and Last updated filters with quick presets, custom calendar selection, and open-ended ranges. Added Apply/Cancel behavior, inclusive-day boundaries, and validation for reversed date ranges.
+- **Improved saved-widget state and recovery:** Added built-in reset safeguards that preserve custom-widget pins. Continued integrating saved-widget loading and refresh while retaining the saved design and query plan, with error and retry handling for failed operations.
+- **Tested and integrated the changes:** Added and extended mobile, backend, and hermetic tests for filtering and saved-widget operations. Resolved widget-state integration issues and resolved upstream accessibility and tag-color changes.
+- **Documented and coordinated the workflow:** Maintained the widget architecture and flow documentation, before/after evidence, and PR verification notes. Participated in team and partner discussions to keep the library and saved-widget behavior aligned with related features.
+
+**Evidence:** [PR #6586](https://github.com/cheapreats/ce/pull/6586)
+
 **[Name]**, [Role]
 > [Specific contributions]
 
