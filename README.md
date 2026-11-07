@@ -171,6 +171,48 @@ Run the checks relevant to the modified subsystem and finish with the partner re
 
 For manual verification, check a populated account/month, an empty period, cancellation before removal, show/hide behavior, and reopening a saved widget. Verify that profile changes and sign-out do not expose another profile's local snapshots. See each feature PR for its exact validation results and limitations.
 
+### D3 process and test evidence
+
+The application lives in the partner's private [Savi Finance repository](https://github.com/cheapreats/ce). Request access from the team if you cannot open the links. This course repository holds the submission documents. Savi already operated its CI runners, deployment services, and branch protections when we joined; we use that infrastructure for the widget changes.
+
+| Area | Evidence |
+| --- | --- |
+| Pull-request CI | [Required Checks](https://github.com/cheapreats/ce/blob/main/.github/workflows/required-checks.yaml) runs on pull requests, including those targeting `main`. It selects checks by changed paths and cancels superseded runs. The [mobile and Go jobs](https://github.com/cheapreats/ce/blob/main/.github/workflows/ci_pr.yaml) run Jest and Bazel tests plus mobile type checking, lint, and backend build verification. See [US-01 checks](https://github.com/cheapreats/ce/pull/6593/checks) for the actual run status. |
+| Resource policy | The partner owns the self-hosted Azure runners and their job timeouts. Some existing partner jobs have longer limits than the course's example. We do not duplicate those builds in the course organization's Actions pool. Use the targeted commands below before pushing and rerun only when there is a change to verify. |
+| Review | [US-01](https://github.com/cheapreats/ce/pull/6593) has a substantive description and partner review comments. It is an open PR, so it is not evidence of an approved merge or a production release. The partner controls the required approvals and merging to `main`. |
+| Environment and release | Use the [mobile config template](https://github.com/cheapreats/ce/blob/main/sba-mobile/.env.example), the [API config template](https://github.com/cheapreats/ce/blob/main/sf1/api/.env.example), and the [Docker-backed local setup](https://github.com/cheapreats/ce/blob/main/dev/README.md). Keep credentials in ignored local configuration or the deployment provider's secret settings. `EXPO_PUBLIC_*` values are bundled with the app; never put provider keys there. |
+
+From a checkout of the linked US-01 PR, run the configured Jest suite and the same mobile type check used in CI:
+
+```bash
+cd sba-mobile
+npm ci
+npm test -- --runInBand \
+  services/widgets/aiWidgetCapabilities.spec.ts \
+  services/widgets/aiWidgetService.spec.ts \
+  components/ask-savi/SupportedWidgetChatCard.spec.tsx \
+  screens/widgets/CreateAiWidgetScreen.spec.tsx \
+  screens/widgets/AiWidgetPreview.spec.tsx \
+  shared/utils/localUserData.spec.ts
+NODE_OPTIONS=--max-old-space-size=16384 node check-types.cjs
+```
+
+These suites cover supported widget types, the RPC request and response, confirmation and preview behavior, and clearing saved snapshots on sign-out. On an earlier US-01 revision (`5d1eb7181`), [mobile tests, lint, and types](https://github.com/cheapreats/ce/actions/runs/41334265916/job/124930683311), [Go tests](https://github.com/cheapreats/ce/actions/runs/41334265916/job/124930683186), and [hermetic checks](https://github.com/cheapreats/ce/actions/runs/41334265916/job/124930683309) passed in Actions. This is historical evidence for those jobs; the overall run was not green. The conflict-resolution commit `3c360f2e6` passed all 25 local presubmit checks, including 777 Bazel tests. The focused mobile run covered 44 widget and chat tests; the `WidgetsModal` rerun passed all 15 tests after the conflict resolution. Both database-backed widget scenarios passed in [Actions](https://github.com/cheapreats/ce/actions/runs/42326871984/job/128264132127); that full run still had 10 failures in MCP and trip scenarios. See the [checks for the conflict-resolution commit](https://github.com/cheapreats/ce/actions/runs/42330059717) for its separate results. From the partner repository root, the focused backend command is:
+
+```bash
+(cd sf1 && bazel test //api/rpc/handlers/generate_supported_widget_view:generate_supported_widget_view_test --test_output=errors)
+```
+
+The backend tests cover authentication and account scope, confirmation before transaction queries, expense filtering, month comparisons, and rejecting unsafe widget trees. To run the database-backed test, start `./dev/dev.sh up --no-lb --no-seed` in one terminal, check `make dev-status`, then run this in another:
+
+```bash
+cd smoke-tests/hermetic
+npm ci
+npm run test:hermetic:filter -- generateSupportedWidgetView
+```
+
+The hermetic test seeds its own transactions. It uses the local test stack and requires neither banking credentials nor a live OpenRouter key.
+
 ## Deployment and GitHub Workflow
 
 ### Task Management
@@ -191,7 +233,7 @@ Use descriptive branch names such as `feat/<ticket-id>-<description>`, `fix/<tic
 
 ### Deployment
 
-Development and testing use the partner's local environments and authorized test accounts. Mobile and backend distribution follow Savi's existing release process. A feature PR or successful local test does not by itself mean the feature is included in the partner's production app.
+Savi's backend is built from `cheapreats/ce` `main` by the partner-managed Railway project using [the API Dockerfile](https://github.com/cheapreats/ce/blob/main/sf1/api/Dockerfile). The [production topology](https://github.com/cheapreats/ce/blob/main/docs/production-topology.md) documents the source branch, service-specific build settings, and ingress; the [deployment history](https://github.com/cheapreats/ce/deployments) records actual production runs. For example, GitHub recorded a successful Railway production deployment for [main commit `6dedfd676`](https://github.com/cheapreats/ce/commit/6dedfd676653d169a61253e7bdf882e93d9f6143); that deployment does not include US-01. Check a deployment's commit against the merged PR before claiming a feature is live. Use [the backend health endpoint](https://api-v2.financesavi.com/healthz) for a basic health check. The iOS EAS release workflow is [manually dispatched by the partner](https://github.com/cheapreats/ce/blob/main/.github/workflows/expo_build_ios.yaml), so a merge does not imply a new TestFlight build.
 
 For D2, the course documents and tested application revision need to identify the same submission scope. The submission should reference a fixed D2 release snapshot so later development does not change what reviewers evaluate. Creating the release and distributing an app build are separate from this README update.
 
