@@ -81,7 +81,7 @@ Refine US-02 (print widget previews in chatbox), including CI fixes, regression 
 - In the same PR, fixed the shared Add button (`SplitAddAction.tsx`), which made Add transaction and Add Account widen until they filled the screen on Android; it now measures its label with a hidden copy.
 - Wrote tests: the new `useWidgetEditMode.spec.ts` (start and stop editing, Android Back only while editing, stop when Overview loses focus) and edit-mode cases in `WidgetRenderer.spec.tsx`, `useWidgetDragAndDrop.spec.ts` and `uiStateManager.spec.ts`.
 - Verified #6602 on the Android emulator and updated `sba-mobile/docs/overview-widgets.md` to describe edit mode.
-- Planned Phase B (custom interfaces) for D4: audited the Transactions and Wallet screens on the Android emulator, checked what `main` already supports (sort fields, grouping, category and vendor analytics), designed 8 Figma screens ([prototype](https://www.figma.com/design/qaNDF00w6vbCEhpD3r1tbG/Savi-Phase-B--mockup?node-id=0-1&p=f&t=I6t60Ynh7xgyLMlD-0)) and listed the backend changes needed.
+- Prepared the Phase 2 custom views (Savi's Custom Interfaces): audited the Transactions and Wallet screens on the Android emulator, checked what `main` already supports (sort fields, grouping, category and vendor totals), wrote use cases UC-1 to UC-7, designed 8 Figma screens ([mockup](https://www.figma.com/design/qaNDF00w6vbCEhpD3r1tbG/Savi-Phase-B--mockup?node-id=0-1&p=f&t=I6t60Ynh7xgyLMlD-0)) and listed the backend changes needed.
 
 **Evidence:** https://www.figma.com/design/qaNDF00w6vbCEhpD3r1tbG/Savi-Phase-B--mockup?node-id=0-1&t=I6t60Ynh7xgyLMlD-1
 https://github.com/cheapreats/ce/pull/6602
