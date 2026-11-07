@@ -32,60 +32,13 @@ Our goal for D3 was therefore not simply to add more individual features. We wan
 
 ### 2.1 Direct Overview Editing
 
-One of the most visible D3 improvements was a new edit mode for the Overview screen, implemented in **PR #6602**.
+[PR #6602](https://github.com/cheapreats/ce/pull/6602) replaces the per-card menu with an edit mode modelled on the iOS home screen. A long press on any widget starts edit mode: widgets jiggle, and each one that can be hidden shows a `−` badge. Tapping the badge removes the widget in place, and the existing Undo toast still puts it back in the same position for four seconds. Done, the Android back button or leaving Overview ends edit mode, and taps on widgets are ignored while editing, so a jiggling card never opens by accident. The same long press also lifts the widget for drag-and-drop, so removing and reordering start from one gesture. Hidden widgets can still be restored from Customize widgets.
 
-The interaction was designed to behave similarly to the iOS home-screen editing experience.
-
-A long press on a widget starts edit mode. While editing:
-
-- widgets jiggle to indicate that the layout can be changed;
-- widgets that can be hidden display a `−` badge;
-- tapping the badge removes the widget directly from Overview;
-- a toast provides an **Undo** action for four seconds;
-- Undo restores the widget to its previous position;
-- the **Done** button exits edit mode;
-- the Android back button also exits edit mode;
-- leaving the Overview screen ends editing;
-- taps on the widget itself are disabled while editing, preventing accidental navigation.
-
-The same long press that begins edit mode can also lift the widget for drag-and-drop. This allows removal and reordering to begin from the same interaction while keeping the actual remove action separate.
-
-Hidden widgets can still be restored through **Customize widgets**, preserving the existing workflow.
-
-We also fixed the Add button that Add transaction (Transactions) and Add Account (Wallet) share. It measured its own container, so its width grew on every layout pass; it now measures the label with a hidden, absolutely positioned copy.
+The same PR fixes the Add button shared by Add transaction (Transactions) and Add Account (Wallet). It measured its own container, so its width grew on every layout pass; it now measures the label with a hidden, absolutely positioned copy.
 
 #### Design Decision
 
-Instead of introducing a separate deleted-widget state, removal reuses the existing:
-
-```text id="3dkwe0"
-isVisible: false
-```
-
-state through `uiStateManager.setWidgetVisibility`.
-
-That visibility state was already stored locally per user.
-
-Reusing it provided several advantages:
-
-- no backend change was required;
-- no data migration was required;
-- Customize widgets continues to work;
-- Undo uses the same state;
-- edit mode and existing widget visibility settings remain consistent.
-
-Edit-mode behaviour was also isolated in a dedicated `useWidgetEditMode` hook.
-
-The hook owns:
-
-- entering edit mode;
-- exiting edit mode;
-- Android back-button handling;
-- stopping edit mode when Overview loses focus.
-
-This keeps `HomeScreen` and `WidgetRenderer` simpler because those components only need to read the resulting `isEditing` state.
-
----
+Removal reuses the existing `isVisible: false` flag (`uiStateManager.setWidgetVisibility`), which is already stored per user on the device, instead of adding a separate deleted-widget state. Customize widgets, Undo and edit mode therefore share one piece of state, with no backend change or data migration. Edit mode lives in its own hook, `useWidgetEditMode`, which owns entering and leaving edit mode and the Android back button, so `HomeScreen` and `WidgetRenderer` only read `isEditing`.
 
 ### 2.2 Widget Management and Discovery
 
