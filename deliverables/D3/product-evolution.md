@@ -10,7 +10,7 @@
 
 After D2, our team identified several limitations in the existing widget experience and AI-generated financial workflow.
 
-The first issue was the **Overview editing experience**. The Overview screen showed a stack of widgets, but changing that stack was slow and indirect. Removing a widget required leaving the card, navigating through an additional menu, and applying the change. Since Overview is intended to show each user the widgets most relevant to them, editing that layout needed to be more direct. We also found a layout bug in the shared Add button on the Transactions and Wallet screens: on Android, it kept widening until it covered the bottom of the screen. These issues were specifically highlighted in partner feedback after D2 and the preparations of the next phase.
+The first issue was the Overview editing experience. In D2, a widget could only be removed from its own card menu, one card at a time, and reordering was a separate drag, even though Overview is meant to be quick to tailor. We also found a layout bug in the shared Add button on the Transactions and Wallet screens: on Android, it kept widening until it covered the bottom of the screen. Both issues came from partner feedback after D2 and our testing while preparing the next phase.
 
 The second issue was **widget management and completion of the widget creation workflow**. Users needed better ways to find saved widgets, manage their visibility, compare generated designs, save a selected widget safely, and place it on the dashboard. Retry, cancellation, and partial-failure behaviour also needed to be more reliable.
 
