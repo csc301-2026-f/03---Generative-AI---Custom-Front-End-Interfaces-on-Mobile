@@ -32,7 +32,7 @@ Our goal for D3 was therefore not simply to add more individual features. We wan
 
 ### 2.1 Direct Overview Editing
 
-[PR #6602](https://github.com/cheapreats/ce/pull/6602) replaces the per-card menu with an edit mode modelled on the iOS home screen. A long press on any widget starts edit mode: widgets jiggle, and each one that can be hidden shows a `−` badge. Tapping the badge removes the widget in place, and the existing Undo toast still puts it back in the same position for four seconds. Done, the Android back button or leaving Overview ends edit mode, and taps on widgets are ignored while editing, so a jiggling card never opens by accident. The same long press also lifts the widget for drag-and-drop, so removing and reordering start from one gesture. Hidden widgets can still be restored from Customize widgets.
+We replaces the per-card menu with an edit mode modelled on the iOS home screen. A long press on any widget starts edit mode: widgets jiggle, and each one that can be hidden shows a `−` badge. Tapping the badge removes the widget in place, and the existing Undo toast still puts it back in the same position for four seconds. Done, the Android back button or leaving Overview ends edit mode, and taps on widgets are ignored while editing, so a jiggling card never opens by accident. The same long press also lifts the widget for drag-and-drop, so removing and reordering start from one gesture. Hidden widgets can still be restored from Customize widgets.
 
 The same PR fixes the Add button shared by Add transaction (Transactions) and Add Account (Wallet). It measured its own container, so its width grew on every layout pass; it now measures the label with a hidden, absolutely positioned copy.
 
@@ -160,6 +160,7 @@ This makes the system more flexible without giving the language model unrestrict
 - [PR #6586](https://github.com/cheapreats/ce/pull/6586) – Widget-management improvements
 - [PR #6593](https://github.com/cheapreats/ce/pull/6593) – AI widget creation and Ask Savi integration
 - [PR #6602](https://github.com/cheapreats/ce/pull/6602) – Overview edit mode, direct widget removal and the shared Add button fix
+- [PR #7727](https://github.com/cheapreats/ce/pull/7727) – lets users design their app theme by describing it to Ask Savi.
 
 ---
 
