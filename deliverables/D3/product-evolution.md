@@ -204,6 +204,10 @@ Existing widget renderer
 
 This makes the system more flexible without giving the language model unrestricted control over financial calculations.
 
+- [PR #6586](https://github.com/cheapreats/ce/pull/6586) – Widget-management improvements
+- [PR #6593](https://github.com/cheapreats/ce/pull/6593) – AI widget creation and Ask Savi integration
+- [PR #6602](https://github.com/cheapreats/ce/pull/6602) – Overview edit mode, direct widget removal and the shared Add button fix
+
 ---
 
 ### 2.5 Integration Challenges
@@ -352,7 +356,9 @@ Generate widget
 
 However, several parts of the surrounding product experience remained incomplete.
 
-On Overview, removing a widget was indirect. A user had to leave the screen they were actively editing, navigate through another menu, apply the change, and repeat the process if the removal was accidental.
+On Overview, removing a widget meant opening that card’s menu and tapping Remove, one card at a time. Undo already existed, but removal was hidden behind each card’s menu and reordering was a separate interaction.
+
+<img src="images/Overview_before.png" width="260" alt="D2: removing a widget from its card menu">
 
 The shared Add button also kept widening until it covered the bottom of the screen.
 
@@ -370,27 +376,9 @@ The AI workflow also remained constrained by predefined financial views.
 
 The Overview experience is now much more direct.
 
-A user can:
+<img src="images/Overvie_after.png" width="260" alt="Overview in edit mode: cards jiggle and hideable cards show a − badge">
 
-```text id="9kfzj3"
-Long press
-→ enter edit mode
-→ tap −
-→ widget disappears
-```
-
-without leaving Overview.
-
-If the removal was accidental:
-
-```text id="cvp6am"
-Undo
-→ widget returns to the same position
-```
-
-within four seconds.
-
-The same long press also begins drag-and-drop, so removing and reordering widgets now start from one interaction rather than requiring separate workflows.
+Removing n widgets now takes one long press and n taps, instead of 2n taps through each card’s menu, and the remove option is visible on every card instead of hidden in a menu, and the same long press also begins drag-and-drop, so removing and reordering widgets now start from one interaction rather than requiring separate workflows.
 
 The Add button now keeps a stable width.
 
@@ -447,11 +435,7 @@ From the engineering perspective, the widget system is increasingly based on reu
 
 Reusing existing state and infrastructure worked particularly well.
 
-For Overview edit mode, using the existing `isVisible` state avoided introducing another persistence mechanism. This meant we needed:
-
-- no backend change;
-- no migration;
-- no duplicate widget-visibility state.
+For Overview edit mode, using the existing `isVisible` state avoided introducing another persistence mechanism. 
 
 Customize widgets, Undo, and direct Overview editing can all operate on the same value.
 
