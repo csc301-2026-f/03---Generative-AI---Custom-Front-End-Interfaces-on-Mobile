@@ -167,9 +167,6 @@ However, the discussion helped us refine the longer-term direction of the projec
 
 Instead of pursuing unrestricted AI-generated interfaces, we are focusing more on structured financial interactions in which AI interprets the user’s request but the application controls filtering, grouping, calculations, authorization, and rendering.
 
-Partner discussion:
-
-[Discord discussion](https://discord.com/channels/1550329767989878876/1550329768640258130/1568445544773320807)
 
 ### Relevant Pull Requests
 
