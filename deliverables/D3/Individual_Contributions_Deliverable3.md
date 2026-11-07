@@ -1,6 +1,5 @@
-# YOUR PRODUCT/TEAM NAME - Individual Contributions (D3)
+# 03-Generative AI Custom Interface- Individual Contributions (D3)
 
-> For each team member: name, role, and specific contributions. Be precise about what you did, not how much you wrote.
 
 ## Kaiwen Yang
 
